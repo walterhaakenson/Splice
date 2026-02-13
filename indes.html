@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Splice - Your Safety Training Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #9b4d96;
+            --secondary-color: #d4a5d4;
+            --accent-color: #ff6b9d;
+            --dark-color: #2d2d2d;
+            --light-color: #f8f8f8;
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav a:hover {
+            opacity: 0.8;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(155,77,150,0.1), rgba(255,107,157,0.1));
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--dark-color);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .progress-banner {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar-container {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            height: 100%;
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 1rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .incentive-box {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+        }
+
+        .incentive-box h3 {
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .incentive-box p {
+            color: var(--dark-color);
+            font-size: 0.9rem;
+        }
+
+        .prize-options {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .prize-option {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            min-width: 150px;
+        }
+
+        .prize-option h4 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .prize-option p {
+            color: var(--dark-color);
+            font-size: 0.9rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e0e0e0;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 1rem;
+            color: var(--dark-color);
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab:hover {
+            color: var(--primary-color);
+        }
+
+        .tab.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .play-button {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .video-duration {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .video-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .status-badge.completed {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .status-badge.in-progress {
+            background: var(--warning-color);
+            color: white;
+        }
+
+        .status-badge.locked {
+            background: #ccc;
+            color: white;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+
+        .product-features li {
+            color: #666;
+            font-size: 0.85rem;
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .product-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(155,77,150,0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .subscription-banner {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .subscription-banner h2 {
+            margin-bottom: 1rem;
+        }
+
+        .subscription-plans {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .plan-card {
+            background: white;
+            color: var(--dark-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            min-width: 200px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .plan-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-price {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .plan-features {
+            list-style: none;
+            text-align: left;
+            margin: 1rem 0;
+        }
+
+        .plan-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .close-modal {
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--dark-color);
+        }
+
+        .video-player {
+            width: 100%;
+            height: 400px;
+            background: #000;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .complete-lesson-btn {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .community-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .community-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .subscription-plans {
+                flex-direction: column;
+            }
+
+            .tabs {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span>🛡️</span>
+                <span>Splice</span>
+            </div>
+            <nav class="nav">
+                <a href="#training">Training</a>
+                <a href="#products">Products</a>
+                <a href="#community">Community</a>
+                <div class="user-info">
+                    <span>👤 Sarah M.</span>
+                    <span>Premium Member</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <h1>Empower Yourself. Stay Safe. Join the Community.</h1>
+            <p>Learn essential self-defense skills from expert instructors, connect with a supportive community of college women, and access recommended safety products—all in one place.</p>
+        </section>
+
+        <div class="progress-banner">
+            <div class="progress-header">
+                <div>
+                    <h2>Your Training Progress</h2>
+                    <p>Complete all modules to enter our monthly giveaway!</p>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color);">62%</div>
+                    <div style="color: #666;">8 of 13 lessons completed</div>
+                </div>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" style="width: 62%;">62%</div>
+            </div>
+            
+            <div class="incentive-box">
+                <h3>🎁 Monthly Completion Giveaway</h3>
+                <p>Complete all training modules by the end of the month and you'll be entered to win!</p>
+                <div class="prize-options">
+                    <div class="prize-option">
+                        <h4>$50 Ulta</h4>
+                        <p>Gift Card</p>
+                    </div>
+                    <div class="prize-option">
+                        <h4>$50 Starbucks</h4>
+                        <p>Gift Card</p>
+                    </div>
+                    <div class="prize-option">
+                        <h4>Premium Splice</h4>
+                        <p>Device Kit</p>
+                    </div>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.85rem;">5 more lessons to go! Winners announced the 1st of every month.</p>
+            </div>
+        </div>
+
+        <div class="subscription-banner">
+            <h2>Not a member yet?</h2>
+            <p>Join thousands of college women learning to protect themselves</p>
+            <div class="subscription-plans">
+                <div class="plan-card">
+                    <h3>Monthly</h3>
+                    <div class="plan-price">$9.99<span style="font-size: 1rem;">/mo</span></div>
+                    <ul class="plan-features">
+                        <li>✓ All training videos</li>
+                        <li>✓ Community access</li>
+                        <li>✓ Monthly giveaways</li>
+                        <li>✓ Product discounts</li>
+                    </ul>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Get Started</button>
+                </div>
+                <div class="plan-card" style="border: 3px solid gold;">
+                    <div style="background: gold; color: #000; padding: 0.3rem; margin: -1.5rem -1.5rem 1rem -1.5rem; font-weight: bold;">BEST VALUE</div>
+                    <h3>Annual</h3>
+                    <div class="plan-price">$89.99<span style="font-size: 1rem;">/yr</span></div>
+                    <p style="color: var(--success-color); font-weight: bold; margin-bottom: 0.5rem;">Save $30!</p>
+                    <ul class="plan-features">
+                        <li>✓ All training videos</li>
+                        <li>✓ Community access</li>
+                        <li>✓ Monthly giveaways</li>
+                        <li>✓ 15% product discounts</li>
+                        <li>✓ Exclusive webinars</li>
+                    </ul>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Get Started</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('training')">📚 Training Library</button>
+            <button class="tab" onclick="switchTab('products')">🛒 Recommended Products</button>
+            <button class="tab" onclick="switchTab('community')">👥 Community</button>
+        </div>
+
+        <div id="training-tab" class="tab-content active">
+            <h2 style="margin-bottom: 1.5rem;">Self-Defense Training Modules</h2>
+            
+            <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Foundation Series</h3>
+            <div class="video-grid">
+                <div class="video-card" onclick="openVideo('Situational Awareness', 'Foundation', 12, true)">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Situational Awareness 101</div>
+                        <div class="video-duration">⏱️ 12 minutes</div>
+                        <div class="video-description">Learn to identify potential threats before they escalate</div>
+                        <div class="video-status">
+                            <span class="status-badge completed">✓ Completed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="openVideo('Personal Space & Boundaries', 'Foundation', 15, true)">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Personal Space & Boundaries</div>
+                        <div class="video-duration">⏱️ 15 minutes</div>
+                        <div class="video-description">Understanding and maintaining safe distances</div>
+                        <div class="video-status">
+                            <span class="status-badge completed">✓ Completed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="openVideo('Verbal De-escalation', 'Foundation', 18, true)">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Verbal De-escalation Techniques</div>
+                        <div class="video-duration">⏱️ 18 minutes</div>
+                        <div class="video-description">Use your voice as your first line of defense</div>
+                        <div class="video-status">
+                            <span class="status-badge completed">✓ Completed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">Physical Defense Techniques</h3>
+            <div class="video-grid">
+                <div class="video-card" onclick="openVideo('Breaking Grabs & Holds', 'Physical', 25, true)">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Breaking Grabs & Holds</div>
+                        <div class="video-duration">⏱️ 25 minutes</div>
+                        <div class="video-description">Escape common restraint scenarios</div>
+                        <div class="video-status">
+                            <span class="status-badge completed">✓ Completed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="openVideo('Ground Defense Basics', 'Physical', 30, true)">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Ground Defense Basics</div>
+                        <div class="video-duration">⏱️ 30 minutes</div>
+                        <div class="video-description">Essential skills when taken to the ground</div>
+                        <div class="video-status">
+                            <span class="status-badge in-progress">In Progress</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="openVideo('Striking Techniques', 'Physical', 28, false)">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Effective Striking Techniques</div>
+                        <div class="video-duration">⏱️ 28 minutes</div>
+                        <div class="video-description">Maximize impact with proper technique</div>
+                        <div class="video-status">
+                            <span class="status-badge locked">🔒 Complete previous lesson</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">Tool-Based Defense</h3>
+            <div class="video-grid">
+                <div class="video-card" onclick="openVideo('Pepper Spray Mastery', 'Tools', 20, true)">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Pepper Spray Mastery</div>
+                        <div class="video-duration">⏱️ 20 minutes</div>
+                        <div class="video-description">Proper deployment and wind considerations</div>
+                        <div class="video-status">
+                            <span class="status-badge completed">✓ Completed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="openVideo('Using Personal Alarms', 'Tools', 10, true)">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Using Personal Alarms Effectively</div>
+                        <div class="video-duration">⏱️ 10 minutes</div>
+                        <div class="video-description">When and how to deploy alarm systems</div>
+                        <div class="video-status">
+                            <span class="status-badge completed">✓ Completed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="openVideo('Splice Device Tutorial', 'Tools', 35, true)">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Complete Splice Device Tutorial</div>
+                        <div class="video-duration">⏱️ 35 minutes</div>
+                        <div class="video-description">Master all features of your Splice tool</div>
+                        <div class="video-status">
+                            <span class="status-badge completed">✓ Completed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="openVideo('Everyday Items', 'Tools', 22, false)">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Everyday Items as Defense Tools</div>
+                        <div class="video-duration">⏱️ 22 minutes</div>
+                        <div class="video-description">Keys, pens, phones—use what you have</div>
+                        <div class="video-status">
+                            <span class="status-badge locked">🔒 Locked</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">Campus-Specific Safety</h3>
+            <div class="video-grid">
+                <div class="video-card" onclick="openVideo('Walking Alone Safely', 'Campus', 16, false)">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Walking Alone Safely at Night</div>
+                        <div class="video-duration">⏱️ 16 minutes</div>
+                        <div class="video-description">Navigate campus safely after dark</div>
+                        <div class="video-status">
+                            <span class="status-badge locked">🔒 Locked</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="openVideo('Dorm Safety', 'Campus', 18, false)">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Dorm & Apartment Safety</div>
+                        <div class="video-duration">⏱️ 18 minutes</div>
+                        <div class="video-description">Secure your living space</div>
+                        <div class="video-status">
+                            <span class="status-badge locked">🔒 Locked</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="openVideo('Party Safety', 'Campus', 24, false)">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Party & Social Event Safety</div>
+                        <div class="video-duration">⏱️ 24 minutes</div>
+                        <div class="video-description">Stay safe in social settings</div>
+                        <div class="video-status">
+                            <span class="status-badge locked">🔒 Locked</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="openVideo('Bystander Intervention', 'Campus', 20, false)">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Bystander Intervention Strategies</div>
+                        <div class="video-duration">⏱️ 20 minutes</div>
+                        <div class="video-description">Help others stay safe</div>
+                        <div class="video-status">
+                            <span class="status-badge locked">🔒 Locked</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="products-tab" class="tab-content">
+            <h2 style="margin-bottom: 1rem;">Recommended Safety Products</h2>
+            <p style="margin-bottom: 2rem; color: #666;">Premium members get 15% off all products!</p>
+            
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">🛡️</div>
+                    <div class="product-info">
+                        <div class="product-name">Splice Premium Kit</div>
+                        <div class="product-price">$89.99 <span style="font-size: 0.9rem; color: #999; text-decoration: line-through;">$105.99</span></div>
+                        <div class="product-description">Our flagship 3-in-1 defense system with alarm, pepper spray, and campus-compliant blade.</div>
+                        <ul class="product-features">
+                            <li>130dB personal alarm</li>
+                            <li>Police-grade pepper spray</li>
+                            <li>3.5" safety blade</li>
+                            <li>Sleek keychain design</li>
+                            <li>Includes training videos</li>
+                        </ul>
+                        <button class="btn btn-primary" style="width: 100%;">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🔔</div>
+                    <div class="product-info">
+                        <div class="product-name">Splice Alarm Only</div>
+                        <div class="product-price">$24.99</div>
+                        <div class="product-description">Compact personal alarm perfect for quick deployment in emergency situations.</div>
+                        <ul class="product-features">
+                            <li>130dB siren</li>
+                            <li>LED strobe light</li>
+                            <li>Replaceable battery</li>
+                            <li>Multiple color options</li>
+                        </ul>
+                        <button class="btn btn-primary" style="width: 100%;">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">💨</div>
+                    <div class="product-info">
+                        <div class="product-name">Premium Pepper Spray</div>
+                        <div class="product-price">$19.99</div>
+                        <div class="product-description">Maximum strength pepper spray with UV marking dye and 12-foot range.</div>
+                        <ul class="product-features">
+                            <li>10% OC concentration</li>
+                            <li>20 bursts per canister</li>
+                            <li>UV marking dye</li>
+                            <li>Practice spray included</li>
+                        </ul>
+                        <button class="btn btn-primary" style="width: 100%;">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🎒</div>
+                    <div class="product-info">
+                        <div class="product-name">Safety Essentials Bundle</div>
+                        <div class="product-price">$149.99 <span style="font-size: 0.9rem; color: #999; text-decoration: line-through;">$180.00</span></div>
+                        <div class="product-description">Complete safety kit with Splice Premium, door alarm, and emergency whistle.</div>
+                        <ul class="product-features">
+                            <li>Splice Premium Kit</li>
+                            <li>Door stop alarm</li>
+                            <li>Emergency whistle</li>
+                            <li>Reflective keychain</li>
+                            <li>Safety guide booklet</li>
+                        </ul>
+                        <button class="btn btn-primary" style="width: 100%;">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🔦</div>
+                    <div class="product-info">
+                        <div class="product-name">Tactical Flashlight</div>
+                        <div class="product-price">$34.99</div>
+                        <div class="product-description">1200-lumen tactical flashlight with strobe mode and reinforced striking bezel.</div>
+                        <ul class="product-features">
+                            <li>1200 lumen output</li>
+                            <li>5 light modes</li>
+                            <li>Strobe function</li>
+                            <li>Waterproof design</li>
+                        </ul>
+                        <button class="btn btn-primary" style="width: 100%;">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">📱</div>
+                    <div class="product-info">
+                        <div class="product-name">Personal Safety App (1 Year)</div>
+                        <div class="product-price">$49.99/yr</div>
+                        <div class="product-description">GPS tracking, emergency contacts, and automatic check-in reminders.</div>
+                        <ul class="product-features">
+                            <li>Live GPS sharing</li>
+                            <li>One-tap emergency alert</li>
+                            <li>Automatic check-ins</li>
+                            <li>Campus safety map</li>
+                        </ul>
+                        <button class="btn btn-primary" style="width: 100%;">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="community-tab" class="tab-content">
+            <div class="community-section">
+                <h2 style="margin-bottom: 1rem;">Join the Splice Community</h2>
+                <p style="margin-bottom: 2rem; color: #666;">Connect with thousands of college women learning to protect themselves and each other.</p>
+                
+                <div class="community-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">12,847</div>
+                        <div class="stat-label">Active Members</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">247</div>
+                        <div class="stat-label">College Campuses</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Feel More Confident</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">156k</div>
+                        <div class="stat-label">Training Hours Completed</div>
+                    </div>
+                </div>
+
+                <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">Recent Success Stories</h3>
+                
+                <div style="background: var(--light-color); padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="width: 50px; height: 50px; background: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">JM</div>
+                        <div>
+                            <div style="font-weight: bold;">Jessica M. - University of Alabama</div>
+                            <div style="color: #666; font-size: 0.9rem;">2 days ago</div>
+                        </div>
+                    </div>
+                    <p>"The verbal de-escalation techniques I learned here literally got me out of an uncomfortable situation last week. I can't thank this community enough for giving me the confidence to speak up and set boundaries."</p>
+                </div>
+
+                <div style="background: var(--light-color); padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">AL</div>
+                        <div>
+                            <div style="font-weight: bold;">Amanda L. - Auburn University</div>
+                            <div style="color: #666; font-size: 0.9rem;">5 days ago</div>
+                        </div>
+                    </div>
+                    <p>"I completed all the training modules and won the Ulta gift card last month! But honestly, the confidence I gained is worth way more than $50. This platform has changed how I move through the world."</p>
+                </div>
+
+                <div style="background: var(--light-color); padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="width: 50px; height: 50px; background: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">RK</div>
+                        <div>
+                            <div style="font-weight: bold;">Rachel K. - University of Georgia</div>
+                            <div style="color: #666; font-size: 0.9rem;">1 week ago</div>
+                        </div>
+                    </div>
+                    <p>"My roommate and I both joined and practice together. Having a training partner makes such a difference. The Splice device is now part of my everyday carry—sleek enough that I actually use it!"</p>
+                </div>
+
+                <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">Upcoming Community Events</h3>
+                
+                <div style="display: grid; gap: 1rem;">
+                    <div style="background: white; border-left: 4px solid var(--primary-color); padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="font-weight: bold; margin-bottom: 0.5rem;">Virtual Self-Defense Workshop</div>
+                        <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">📅 February 20, 2026 • 7:00 PM EST</div>
+                        <p style="font-size: 0.9rem; color: #666;">Live practice session with certified instructor. Bring questions!</p>
+                        <button class="btn btn-secondary" style="margin-top: 1rem;">Register</button>
+                    </div>
+
+                    <div style="background: white; border-left: 4px solid var(--accent-color); padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="font-weight: bold; margin-bottom: 0.5rem;">Campus Safety Panel Discussion</div>
+                        <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">📅 February 27, 2026 • 6:00 PM EST</div>
+                        <p style="font-size: 0.9rem; color: #666;">Featuring campus police, survivors, and safety experts.</p>
+                        <button class="btn btn-secondary" style="margin-top: 1rem;">Register</button>
+                    </div>
+
+                    <div style="background: white; border-left: 4px solid var(--primary-color); padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="font-weight: bold; margin-bottom: 0.5rem;">Monthly Q&A with Instructors</div>
+                        <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">📅 March 5, 2026 • 8:00 PM EST</div>
+                        <p style="font-size: 0.9rem; color: #666;">Get your questions answered by our expert team.</p>
+                        <button class="btn btn-secondary" style="margin-top: 1rem;">Register</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Lesson Title</h2>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="video-player">
+                <div style="text-align: center;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">▶️</div>
+                    <div>Video Player</div>
+                    <div style="font-size: 0.9rem; opacity: 0.7; margin-top: 0.5rem;">In a production environment, this would be a real video player</div>
+                </div>
+            </div>
+            <div id="modalDescription" style="margin: 1rem 0; color: #666;"></div>
+            <div id="modalDuration" style="margin: 0.5rem 0; color: #666;"></div>
+            <button id="completeBtn" class="btn btn-primary complete-lesson-btn" onclick="completeLesson()">
+                Mark as Complete ✓
+            </button>
+            <div style="margin-top: 1rem; padding: 1rem; background: var(--light-color); border-radius: 5px;">
+                <h4 style="margin-bottom: 0.5rem;">💡 Quick Tip</h4>
+                <p style="font-size: 0.9rem; color: #666;">Practice makes perfect! Review this video multiple times and try the techniques in a safe environment before you need them.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab content
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        function openVideo(title, category, duration, unlocked) {
+            if (!unlocked) {
+                alert('Please complete the previous lessons to unlock this content!');
+                return;
+            }
+            
+            const modal = document.getElementById('videoModal');
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalDescription').textContent = 'Category: ' + category;
+            document.getElementById('modalDuration').textContent = 'Duration: ' + duration + ' minutes';
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('videoModal');
+            modal.classList.remove('active');
+        }
+
+        function completeLesson() {
+            alert('🎉 Lesson completed! You\'re one step closer to winning this month\'s giveaway!');
+            closeModal();
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('videoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
