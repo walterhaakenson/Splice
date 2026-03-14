@@ -1,1173 +1,1337 @@
+Here's the complete HTML code:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Splice - Your Safety Training Platform</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #9b4d96;
-            --secondary-color: #d4a5d4;
-            --accent-color: #ff6b9d;
-            --dark-color: #2d2d2d;
-            --light-color: #f8f8f8;
-            --success-color: #4caf50;
-            --warning-color: #ff9800;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--dark-color);
-            background-color: var(--light-color);
-        }
-
-        .header {
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            color: white;
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .nav {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav a {
-            color: white;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-
-        .nav a:hover {
-            opacity: 0.8;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            background: rgba(255,255,255,0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .hero {
-            background: linear-gradient(135deg, rgba(155,77,150,0.1), rgba(255,107,157,0.1));
-            padding: 3rem 2rem;
-            border-radius: 15px;
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--dark-color);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .progress-banner {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .progress-bar-container {
-            background: #e0e0e0;
-            height: 30px;
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress-bar {
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-            height: 100%;
-            transition: width 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 1rem;
-            color: white;
-            font-weight: bold;
-        }
-
-        .incentive-box {
-            background: linear-gradient(135deg, #ffd700, #ffed4e);
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin-top: 1rem;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(255,215,0,0.3);
-        }
-
-        .incentive-box h3 {
-            color: var(--dark-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .incentive-box p {
-            color: var(--dark-color);
-            font-size: 0.9rem;
-        }
-
-        .prize-options {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .prize-option {
-            background: white;
-            padding: 1rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            min-width: 150px;
-        }
-
-        .prize-option h4 {
-            color: var(--primary-color);
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .prize-option p {
-            color: var(--dark-color);
-            font-size: 0.9rem;
-        }
-
-        .tabs {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            border-bottom: 2px solid #e0e0e0;
-            flex-wrap: wrap;
-        }
-
-        .tab {
-            padding: 1rem 2rem;
-            cursor: pointer;
-            border: none;
-            background: none;
-            font-size: 1rem;
-            color: var(--dark-color);
-            transition: all 0.3s;
-            border-bottom: 3px solid transparent;
-        }
-
-        .tab:hover {
-            color: var(--primary-color);
-        }
-
-        .tab.active {
-            color: var(--primary-color);
-            border-bottom-color: var(--primary-color);
-            font-weight: bold;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .video-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-        }
-
-        .video-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-        }
-
-        .video-thumbnail {
-            width: 100%;
-            height: 180px;
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .play-button {
-            width: 60px;
-            height: 60px;
-            background: rgba(255,255,255,0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-        }
-
-        .video-info {
-            padding: 1.5rem;
-        }
-
-        .video-title {
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            color: var(--dark-color);
-        }
-
-        .video-duration {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .video-description {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .video-status {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .status-badge {
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .status-badge.completed {
-            background: var(--success-color);
-            color: white;
-        }
-
-        .status-badge.in-progress {
-            background: var(--warning-color);
-            color: white;
-        }
-
-        .status-badge.locked {
-            background: #ccc;
-            color: white;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-        }
-
-        .product-info {
-            padding: 1.5rem;
-        }
-
-        .product-name {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            color: var(--dark-color);
-        }
-
-        .product-price {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .product-description {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .product-features {
-            list-style: none;
-            margin-bottom: 1rem;
-        }
-
-        .product-features li {
-            color: #666;
-            font-size: 0.85rem;
-            padding: 0.3rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .product-features li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--success-color);
-            font-weight: bold;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            text-decoration: none;
-            transition: all 0.3s;
-            text-align: center;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(155,77,150,0.3);
-        }
-
-        .btn-secondary {
-            background: white;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-        }
-
-        .btn-secondary:hover {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .subscription-banner {
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .subscription-banner h2 {
-            margin-bottom: 1rem;
-        }
-
-        .subscription-plans {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .plan-card {
-            background: white;
-            color: var(--dark-color);
-            padding: 1.5rem;
-            border-radius: 10px;
-            min-width: 200px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .plan-card h3 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .plan-price {
-            font-size: 2rem;
-            font-weight: bold;
-            margin: 1rem 0;
-        }
-
-        .plan-features {
-            list-style: none;
-            text-align: left;
-            margin: 1rem 0;
-        }
-
-        .plan-features li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            max-width: 800px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .close-modal {
-            font-size: 2rem;
-            cursor: pointer;
-            background: none;
-            border: none;
-            color: var(--dark-color);
-        }
-
-        .video-player {
-            width: 100%;
-            height: 400px;
-            background: #000;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-
-        .complete-lesson-btn {
-            width: 100%;
-            margin-top: 1rem;
-        }
-
-        .community-section {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .community-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            color: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .nav {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-
-            .subscription-plans {
-                flex-direction: column;
-            }
-
-            .tabs {
-                overflow-x: auto;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Splice — Safety Meets Innovation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blush: #F2B5C0;
+    --rose: #D4647A;
+    --deep: #1A0A10;
+    --cream: #FDF6F0;
+    --warm: #F5E6D3;
+    --gold: #C9944A;
+    --text: #2D1018;
+    --muted: #7A5560;
+    --navy: #1B2B4B;
+    --navy-light: #2A3F66;
+    --silver: #E8EDF5;
+    --slate: #5A6A85;
+    --greek-purple: #4A2C6E;
+    --greek-gold: #C9944A;
+    --greek-light: #F7F3FD;
+    --greek-mid: #8B5CF6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  .audience-bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    background: var(--deep);
+    display: flex; justify-content: center; align-items: center;
+    gap: 0; padding: 0;
+    height: 44px;
+  }
+  .aud-btn {
+    flex: 1; max-width: 260px;
+    height: 100%;
+    background: transparent;
+    color: rgba(255,255,255,0.5);
+    border: none; border-bottom: 2px solid transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+  }
+  .aud-btn:hover { color: rgba(255,255,255,0.8); }
+  .aud-btn.active-student { color: var(--blush); border-bottom-color: var(--rose); }
+  .aud-btn.active-parent { color: #93b4e0; border-bottom-color: #4a7fc1; }
+  .aud-btn.active-greek { color: #c4a6f0; border-bottom-color: var(--greek-mid); }
+  .aud-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.1); }
+
+  nav {
+    position: fixed; top: 44px; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.1rem 3rem;
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    transition: background 0.3s;
+  }
+  nav.nav-student { background: rgba(253,246,240,0.93); }
+  nav.nav-parent  { background: rgba(27,43,75,0.96); }
+  nav.nav-greek   { background: rgba(74,44,110,0.96); }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem; font-weight: 700;
+    cursor: pointer; letter-spacing: -0.3px;
+  }
+  .logo.logo-student { color: var(--rose); }
+  .logo.logo-student span { color: var(--deep); }
+  .logo.logo-parent  { color: #93b4e0; }
+  .logo.logo-parent span { color: white; }
+  .logo.logo-greek   { color: #c4a6f0; }
+  .logo.logo-greek span { color: #f0e6a0; }
+
+  .nav-tag {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; padding: 0.2rem 0.7rem;
+    border-radius: 50px; margin-left: 0.6rem;
+    vertical-align: middle;
+  }
+  .nav-tag.tag-parent { background: #4a7fc133; color: #93b4e0; border: 1px solid #4a7fc155; }
+  .nav-tag.tag-greek  { background: rgba(139,92,246,0.2); color: #c4a6f0; border: 1px solid rgba(139,92,246,0.3); }
+
+  .nav-cta {
+    border: none; padding: 0.65rem 1.6rem; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.88rem;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .nav-cta.cta-student { background: var(--rose); color: white; }
+  .nav-cta.cta-student:hover { background: var(--deep); }
+  .nav-cta.cta-parent  { background: #4a7fc1; color: white; }
+  .nav-cta.cta-parent:hover  { background: #2a5fa0; }
+  .nav-cta.cta-greek   { background: var(--greek-mid); color: white; }
+  .nav-cta.cta-greek:hover   { background: var(--greek-purple); }
+
+  .view { display: none; min-height: 100vh; padding-top: 88px; }
+  .view.active { display: block; }
+
+  .hero {
+    min-height: calc(100vh - 88px);
+    display: flex; align-items: center;
+    padding: 4rem 3rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 40%, #F2B5C022 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 90% 80%, #D4647A11 0%, transparent 60%);
+  }
+  .hero-pattern {
+    position: absolute; right: -50px; top: 50%; transform: translateY(-50%);
+    width: 520px; height: 520px; border-radius: 50%;
+    background: conic-gradient(from 0deg, #F2B5C0, #D4647A, #C9944A, #F2B5C0);
+    opacity: 0.07; animation: slowSpin 22s linear infinite;
+  }
+  @keyframes slowSpin { to { transform: translateY(-50%) rotate(360deg); } }
+  .hero-content { position: relative; max-width: 600px; }
+  .hero-eyebrow {
+    display: inline-block; background: var(--warm); border: 1px solid var(--blush);
+    color: var(--rose); font-size: 0.78rem; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 50px;
+    margin-bottom: 1.5rem; animation: fadeUp 0.6s ease both;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 6vw, 5rem);
+    line-height: 1.05; font-weight: 700; margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero h1 em { color: var(--rose); font-style: italic; }
+  .hero p { font-size: 1.1rem; line-height: 1.7; color: var(--muted); margin-bottom: 2.5rem; animation: fadeUp 0.6s 0.2s ease both; }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
+  .btn-primary {
+    background: var(--rose); color: white; border: none;
+    padding: 0.95rem 2.2rem; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.95rem;
+    cursor: pointer; transition: all 0.25s;
+    box-shadow: 0 4px 20px rgba(212,100,122,0.35);
+  }
+  .btn-primary:hover { background: var(--deep); transform: translateY(-2px); }
+  .btn-secondary {
+    background: transparent; color: var(--text);
+    border: 2px solid var(--blush); padding: 0.95rem 2.2rem; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.95rem;
+    cursor: pointer; transition: all 0.25s;
+  }
+  .btn-secondary:hover { border-color: var(--rose); color: var(--rose); }
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 3.5rem; padding-top: 2rem;
+    border-top: 1px solid var(--blush); animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 700; color: var(--rose); }
+  .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.1rem; line-height: 1.4; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  section { padding: 5.5rem 3rem; }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--rose); margin-bottom: 0.8rem; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; line-height: 1.12; margin-bottom: 1rem; }
+  .section-sub { font-size: 1rem; color: var(--muted); line-height: 1.65; max-width: 520px; }
+
+  .how-section { background: var(--warm); }
+  .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.8rem; margin-top: 3rem; }
+  .step-card {
+    background: white; border-radius: 20px; padding: 1.8rem;
+    border: 1px solid rgba(212,100,122,0.1); transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .step-card:hover { transform: translateY(-4px); box-shadow: 0 12px 35px rgba(212,100,122,0.14); }
+  .step-num {
+    width: 46px; height: 46px; background: var(--rose); color: white; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700;
+    margin-bottom: 1.1rem;
+  }
+  .step-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin-bottom: 0.5rem; }
+  .step-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+  .courses-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.4rem; }
+  .course-card {
+    border-radius: 20px; overflow: hidden; border: 1px solid rgba(212,100,122,0.12);
+    background: white; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .course-card:hover { transform: translateY(-5px); box-shadow: 0 14px 45px rgba(212,100,122,0.16); }
+  .course-thumb { height: 150px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+  .course-body { padding: 1.3rem; }
+  .course-badge { display: inline-block; background: var(--warm); color: var(--rose); font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 0.2rem 0.7rem; border-radius: 50px; margin-bottom: 0.6rem; }
+  .course-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; margin-bottom: 0.3rem; }
+  .course-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.55; margin-bottom: 0.9rem; }
+  .course-meta { display: flex; gap: 1rem; font-size: 0.78rem; color: var(--muted); }
+
+  .rewards-section { background: var(--deep); color: white; }
+  .rewards-section .section-label { color: var(--blush); }
+  .rewards-section .section-title { color: white; }
+  .rewards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1.4rem; margin-top: 2.8rem; }
+  .reward-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 1.8rem; text-align: center; transition: background 0.2s; }
+  .reward-card:hover { background: rgba(255,255,255,0.1); }
+  .reward-icon { font-size: 2.2rem; margin-bottom: 0.9rem; }
+  .reward-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .reward-card p { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+  .reward-val { display: inline-block; margin-top: 0.7rem; background: var(--rose); color: white; font-size: 0.78rem; font-weight: 600; padding: 0.25rem 0.7rem; border-radius: 50px; }
+
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2.8rem; max-width: 880px; margin-left: auto; margin-right: auto; }
+  .price-card { border-radius: 22px; padding: 2.3rem; border: 2px solid rgba(212,100,122,0.15); background: white; position: relative; transition: transform 0.2s; }
+  .price-card:hover { transform: translateY(-4px); }
+  .price-card.featured { border-color: var(--rose); background: var(--deep); color: white; box-shadow: 0 20px 55px rgba(212,100,122,0.28); }
+  .price-card.featured .plan-sub { color: rgba(255,255,255,0.55); }
+  .popular-tag { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--rose); color: white; font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; padding: 0.25rem 1rem; border-radius: 50px; text-transform: uppercase; }
+  .plan-name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .plan-sub { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.4rem; }
+  .plan-price { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700; line-height: 1; margin-bottom: 0.3rem; }
+  .plan-price sup { font-size: 1.1rem; vertical-align: top; margin-top: 0.5rem; }
+  .plan-price span { font-size: 0.95rem; font-weight: 400; opacity: 0.6; }
+  .plan-features { list-style: none; margin: 1.4rem 0 1.8rem; }
+  .plan-features li { font-size: 0.85rem; padding: 0.38rem 0; display: flex; align-items: center; gap: 0.6rem; border-bottom: 1px solid rgba(212,100,122,0.08); }
+  .price-card.featured .plan-features li { border-color: rgba(255,255,255,0.08); }
+  .check { color: var(--rose); }
+  .price-card.featured .check { color: var(--blush); }
+  .plan-btn { width: 100%; padding: 0.85rem; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.92rem; cursor: pointer; transition: all 0.2s; border: none; }
+  .price-card:not(.featured) .plan-btn { background: var(--warm); color: var(--text); }
+  .price-card:not(.featured) .plan-btn:hover { background: var(--blush); }
+  .price-card.featured .plan-btn { background: var(--rose); color: white; }
+  .price-card.featured .plan-btn:hover { background: var(--blush); color: var(--deep); }
+
+  .testimonials-section { background: var(--warm); }
+  .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.4rem; margin-top: 2.8rem; }
+  .testi-card { background: white; border-radius: 18px; padding: 1.8rem; border: 1px solid rgba(212,100,122,0.1); }
+  .stars { color: var(--gold); font-size: 1rem; margin-bottom: 0.9rem; }
+  .testi-text { font-size: 0.9rem; line-height: 1.7; color: var(--text); margin-bottom: 1.1rem; font-style: italic; }
+  .testi-author { font-weight: 600; font-size: 0.83rem; }
+  .testi-school { font-size: 0.76rem; color: var(--muted); }
+
+  #parent-landing { background: #f0f4fc; }
+  .parent-hero {
+    min-height: calc(100vh - 88px);
+    background: linear-gradient(135deg, var(--navy) 0%, #0f1e38 100%);
+    display: flex; align-items: center;
+    padding: 4rem 3rem; position: relative; overflow: hidden;
+  }
+  .parent-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 80% 50%, rgba(74,127,193,0.12) 0%, transparent 70%);
+  }
+  .parent-hero-deco {
+    position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+    width: 420px; height: 420px;
+    border: 1px solid rgba(74,127,193,0.15); border-radius: 50%;
+    animation: slowSpin 30s linear infinite;
+  }
+  .parent-hero-deco::after {
+    content: ''; position: absolute; inset: 30px;
+    border: 1px solid rgba(74,127,193,0.1); border-radius: 50%;
+  }
+  .parent-hero-content { position: relative; max-width: 620px; }
+  .parent-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(74,127,193,0.15); border: 1px solid rgba(74,127,193,0.3);
+    color: #93b4e0; font-size: 0.75rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 50px;
+    margin-bottom: 1.5rem; animation: fadeUp 0.6s ease both;
+  }
+  .parent-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 5.5vw, 4.8rem); line-height: 1.05; font-weight: 600; color: white;
+    margin-bottom: 1.5rem; animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .parent-hero h1 em { color: #93b4e0; font-style: italic; }
+  .parent-hero p { font-size: 1.05rem; line-height: 1.75; color: rgba(255,255,255,0.65); margin-bottom: 2.5rem; animation: fadeUp 0.6s 0.2s ease both; }
+  .parent-actions { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
+  .btn-parent-primary {
+    background: #4a7fc1; color: white; border: none;
+    padding: 0.95rem 2.2rem; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.95rem;
+    cursor: pointer; transition: all 0.25s;
+    box-shadow: 0 4px 22px rgba(74,127,193,0.4);
+  }
+  .btn-parent-primary:hover { background: #2a5fa0; transform: translateY(-2px); }
+  .btn-parent-ghost {
+    background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.8);
+    border: 1px solid rgba(255,255,255,0.2); padding: 0.95rem 2.2rem; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.95rem;
+    cursor: pointer; transition: all 0.25s;
+  }
+  .btn-parent-ghost:hover { background: rgba(255,255,255,0.14); color: white; }
+  .parent-trust-bar {
+    display: flex; gap: 2.5rem; margin-top: 3.5rem; padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .trust-item .t-num { font-family: 'Cormorant Garamond', serif; font-size: 2.1rem; font-weight: 700; color: #93b4e0; }
+  .trust-item .t-label { font-size: 0.78rem; color: rgba(255,255,255,0.45); line-height: 1.4; margin-top: 0.1rem; }
+
+  .parent-section { padding: 5.5rem 3rem; }
+  .parent-section-light { background: white; }
+  .parent-section-silver { background: #f0f4fc; }
+  .parent-section-navy { background: var(--navy); color: white; }
+  .parent-section-navy .section-title { color: white; }
+  .parent-section-navy .section-sub { color: rgba(255,255,255,0.6); }
+  .parent-section .section-label { color: #4a7fc1; }
+  .parent-section-navy .section-label { color: #93b4e0; }
+
+  .parent-value-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .parent-value-card {
+    background: white; border-radius: 20px; padding: 2rem;
+    border: 1px solid rgba(74,127,193,0.1); transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .parent-section-navy .parent-value-card { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); }
+  .parent-value-card:hover { transform: translateY(-4px); box-shadow: 0 12px 35px rgba(74,127,193,0.14); }
+  .pvc-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+  .pvc-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 700; color: #4a7fc1; margin-bottom: 0.3rem; }
+  .parent-section-navy .pvc-num { color: #93b4e0; }
+  .parent-value-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin-bottom: 0.5rem; }
+  .parent-value-card p { font-size: 0.86rem; color: var(--muted); line-height: 1.65; }
+  .parent-section-navy .parent-value-card p { color: rgba(255,255,255,0.55); }
+  .parent-section-navy .parent-value-card h3 { color: white; }
+
+  .gifting-box {
+    background: linear-gradient(135deg, var(--navy), #0f1e38);
+    border-radius: 28px; padding: 3rem;
+    color: white; display: grid;
+    grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+    margin-top: 3rem;
+  }
+  @media (max-width: 700px) { .gifting-box { grid-template-columns: 1fr; gap: 2rem; } }
+  .gifting-box h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; line-height: 1.2; margin-bottom: 1rem; }
+  .gifting-box p { color: rgba(255,255,255,0.65); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem; }
+  .gift-plans { display: flex; flex-direction: column; gap: 0.8rem; }
+  .gift-plan {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px; padding: 1.1rem 1.4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer; transition: background 0.15s;
+  }
+  .gift-plan:hover { background: rgba(255,255,255,0.12); }
+  .gift-plan.selected { border-color: #4a7fc1; background: rgba(74,127,193,0.15); }
+  .gp-left h4 { font-size: 0.92rem; font-weight: 600; }
+  .gp-left p { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 0.2rem; }
+  .gp-price { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 700; color: #93b4e0; }
+
+  .parent-testi-card { background: var(--silver); border-radius: 18px; padding: 1.8rem; }
+  .parent-stars { color: var(--gold); font-size: 1rem; margin-bottom: 0.9rem; }
+
+  #greek-landing { background: var(--greek-light); }
+  .greek-hero {
+    min-height: calc(100vh - 88px);
+    background: linear-gradient(140deg, var(--greek-purple) 0%, #2d1048 100%);
+    display: flex; align-items: center;
+    padding: 4rem 3rem; position: relative; overflow: hidden;
+  }
+  .greek-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 75% 30%, rgba(139,92,246,0.18) 0%, transparent 60%);
+  }
+  .greek-hero-deco {
+    position: absolute; right: 3%; top: 50%; transform: translateY(-50%);
+    width: 460px; height: 460px;
+    border: 1px solid rgba(139,92,246,0.2); border-radius: 50%;
+  }
+  .greek-hero-deco::before {
+    content: ''; position: absolute; inset: -40px;
+    border: 1px solid rgba(201,148,74,0.12); border-radius: 50%;
+  }
+  .greek-hero-deco::after {
+    content: ''; position: absolute; inset: 60px;
+    border: 1px solid rgba(139,92,246,0.12); border-radius: 50%;
+  }
+  .greek-badge-ring {
+    position: absolute; right: 10%; top: 50%; transform: translateY(-50%);
+    width: 200px; height: 200px;
+    background: rgba(201,148,74,0.1); border: 1px solid rgba(201,148,74,0.2);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+  }
+  .greek-hero-content { position: relative; max-width: 620px; }
+  .greek-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(201,148,74,0.15); border: 1px solid rgba(201,148,74,0.35);
+    color: #f0d090; font-size: 0.75rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 50px;
+    margin-bottom: 1.5rem; animation: fadeUp 0.6s ease both;
+  }
+  .greek-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 5.5vw, 4.8rem); line-height: 1.05; font-weight: 700; color: white;
+    margin-bottom: 1.5rem; animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .greek-hero h1 em { color: #f0d090; font-style: italic; }
+  .greek-hero h1 strong { color: #c4a6f0; }
+  .greek-hero p { font-size: 1.05rem; line-height: 1.75; color: rgba(255,255,255,0.65); margin-bottom: 2.5rem; animation: fadeUp 0.6s 0.2s ease both; }
+  .greek-actions { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
+  .btn-greek-primary {
+    background: var(--greek-gold); color: var(--deep); border: none;
+    padding: 0.95rem 2.2rem; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.95rem;
+    cursor: pointer; transition: all 0.25s;
+    box-shadow: 0 4px 22px rgba(201,148,74,0.4);
+  }
+  .btn-greek-primary:hover { background: #dfa845; transform: translateY(-2px); }
+  .btn-greek-ghost {
+    background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.8);
+    border: 1px solid rgba(255,255,255,0.2); padding: 0.95rem 2.2rem; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.95rem;
+    cursor: pointer; transition: all 0.25s;
+  }
+  .btn-greek-ghost:hover { background: rgba(255,255,255,0.14); color: white; }
+  .greek-trust-bar {
+    display: flex; gap: 2.5rem; margin-top: 3.5rem; padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .greek-trust-num { font-family: 'Cormorant Garamond', serif; font-size: 2.1rem; font-weight: 700; color: #f0d090; }
+  .greek-trust-label { font-size: 0.78rem; color: rgba(255,255,255,0.45); line-height: 1.4; margin-top: 0.1rem; }
+
+  .greek-section { padding: 5.5rem 3rem; }
+  .greek-section-light { background: var(--greek-light); }
+  .greek-section-white { background: white; }
+  .greek-section-purple { background: var(--greek-purple); color: white; }
+  .greek-section-purple .section-title { color: white; }
+  .greek-section-purple .section-sub { color: rgba(255,255,255,0.6); }
+  .greek-section .section-label { color: var(--greek-purple); }
+  .greek-section-purple .section-label { color: #f0d090; }
+
+  .greek-feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .greek-feature-card {
+    background: white; border-radius: 20px; padding: 2rem;
+    border: 1px solid rgba(74,44,110,0.1); transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .greek-feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 35px rgba(74,44,110,0.12); }
+  .gfc-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+  .greek-feature-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--greek-purple); }
+  .greek-feature-card p { font-size: 0.86rem; color: var(--muted); line-height: 1.65; }
+
+  .chapter-plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 3rem; max-width: 900px; margin-left: auto; margin-right: auto; }
+  .chapter-plan {
+    border-radius: 22px; padding: 2.2rem;
+    border: 2px solid rgba(74,44,110,0.15); background: white; position: relative;
+    transition: transform 0.2s;
+  }
+  .chapter-plan:hover { transform: translateY(-4px); }
+  .chapter-plan.featured-greek {
+    border-color: var(--greek-gold);
+    background: linear-gradient(135deg, var(--greek-purple), #2d1048);
+    color: white;
+    box-shadow: 0 18px 50px rgba(74,44,110,0.3);
+  }
+  .chapter-plan.featured-greek .plan-sub { color: rgba(255,255,255,0.55); }
+  .chapter-plan.featured-greek .plan-features li { border-color: rgba(255,255,255,0.08); }
+  .chapter-plan.featured-greek .check { color: #f0d090; }
+  .greek-popular-tag { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--greek-gold); color: var(--deep); font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; padding: 0.25rem 1rem; border-radius: 50px; text-transform: uppercase; white-space: nowrap; }
+  .chapter-plan:not(.featured-greek) .plan-btn { background: var(--greek-light); color: var(--greek-purple); border: 1px solid rgba(74,44,110,0.15); }
+  .chapter-plan:not(.featured-greek) .plan-btn:hover { background: rgba(74,44,110,0.08); }
+  .chapter-plan.featured-greek .plan-btn { background: var(--greek-gold); color: var(--deep); }
+  .chapter-plan.featured-greek .plan-btn:hover { background: #dfa845; }
+  .chapter-plan.featured-greek .plan-name { color: white; }
+  .chapter-plan.featured-greek .plan-price { color: white; }
+
+  .greek-dashboard-preview {
+    background: linear-gradient(135deg, var(--greek-purple) 0%, #1a0a2e 100%);
+    border-radius: 28px; padding: 3rem; color: white; margin-top: 3rem;
+  }
+  .greek-dashboard-preview h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 0.6rem; }
+  .greek-dashboard-preview p { color: rgba(255,255,255,0.65); font-size: 0.92rem; margin-bottom: 2rem; line-height: 1.65; }
+  .dash-mockup { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
+  .dash-mock-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 1.2rem; text-align: center; }
+  .dash-mock-card .val { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 700; color: #f0d090; }
+  .dash-mock-card .lbl { font-size: 0.76rem; color: rgba(255,255,255,0.5); margin-top: 0.3rem; }
+
+  .greek-testi-card { background: white; border: 1px solid rgba(74,44,110,0.1); border-radius: 18px; padding: 1.8rem; }
+  .greek-stars { color: var(--greek-gold); font-size: 1rem; margin-bottom: 0.9rem; }
+
+  #dashboard-view { background: var(--cream); }
+  .dash-layout { display: grid; grid-template-columns: 250px 1fr; min-height: calc(100vh - 88px); }
+  .sidebar { background: var(--deep); padding: 2rem 1.5rem; position: sticky; top: 88px; height: calc(100vh - 88px); overflow-y: auto; }
+  .sidebar-greeting { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .sidebar-greeting .label { font-size: 0.72rem; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 1px; }
+  .sidebar-greeting .name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: white; margin-top: 0.2rem; }
+  .sidebar-nav { list-style: none; }
+  .sidebar-nav a { display: flex; align-items: center; gap: 0.7rem; padding: 0.7rem 1rem; border-radius: 10px; font-size: 0.85rem; color: rgba(255,255,255,0.6); cursor: pointer; transition: all 0.15s; text-decoration: none; }
+  .sidebar-nav a:hover, .sidebar-nav a.active { background: rgba(255,255,255,0.07); color: white; }
+  .sidebar-nav a.active { color: var(--blush); }
+  .sidebar-progress { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); }
+  .sidebar-progress .label { font-size: 0.7rem; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.7rem; }
+  .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 50px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--rose); border-radius: 50px; transition: width 0.4s ease; }
+  .progress-text { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 0.4rem; }
+  .dash-main { padding: 2.5rem; }
+  .dash-header { margin-bottom: 2rem; }
+  .dash-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 700; }
+  .dash-header p { color: var(--muted); font-size: 0.88rem; margin-top: 0.3rem; }
+  .dash-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 2.5rem; }
+  .dash-stat { background: white; border-radius: 14px; padding: 1.3rem; border: 1px solid rgba(212,100,122,0.1); }
+  .dash-stat .label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .dash-stat .value { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 700; color: var(--rose); margin-top: 0.2rem; }
+  .dash-section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 1.1rem; }
+  .module-list { display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 2.5rem; }
+  .module-item { background: white; border-radius: 14px; padding: 1.3rem 1.5rem; border: 1px solid rgba(212,100,122,0.1); display: flex; align-items: center; gap: 1.1rem; cursor: pointer; transition: all 0.2s; }
+  .module-item:hover { box-shadow: 0 6px 22px rgba(212,100,122,0.11); transform: translateX(3px); }
+  .module-item.completed { border-color: rgba(212,100,122,0.22); background: #fff9fa; }
+  .module-item.locked { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+  .module-icon { width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; background: var(--warm); }
+  .module-item.completed .module-icon { background: #fde8ec; }
+  .module-info { flex: 1; }
+  .module-info h4 { font-weight: 600; font-size: 0.92rem; margin-bottom: 0.2rem; }
+  .module-info p { font-size: 0.78rem; color: var(--muted); }
+  .module-status { font-size: 0.78rem; font-weight: 600; padding: 0.28rem 0.7rem; border-radius: 50px; }
+  .status-done { background: #fde8ec; color: var(--rose); }
+  .status-next { background: var(--rose); color: white; }
+  .status-locked { background: var(--warm); color: var(--muted); }
+  .rewards-panel { background: var(--deep); border-radius: 18px; padding: 1.8rem; color: white; margin-bottom: 2.5rem; }
+  .rewards-panel h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin-bottom: 1.3rem; }
+  .reward-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.9rem; }
+  .reward-item { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; text-align: center; }
+  .reward-item .icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .reward-item h4 { font-size: 0.82rem; font-weight: 600; margin-bottom: 0.2rem; }
+  .reward-item p { font-size: 0.72rem; color: rgba(255,255,255,0.45); }
+  .reward-item.earned { border-color: var(--blush); background: rgba(242,181,192,0.1); }
+  .reward-item.earned h4 { color: var(--blush); }
+  .earned-tag { display: inline-block; background: var(--rose); color: white; font-size: 0.65rem; font-weight: 700; padding: 0.12rem 0.5rem; border-radius: 50px; margin-top: 0.3rem; }
+
+  #video-view { background: var(--deep); }
+  .video-layout { display: grid; grid-template-columns: 1fr 300px; min-height: 100vh; padding-top: 88px; }
+  .video-main { padding: 2rem; }
+  .video-player { background: #0a0008; border-radius: 18px; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.07); }
+  .video-placeholder { text-align: center; color: white; }
+  .play-btn { width: 76px; height: 76px; background: var(--rose); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.7rem; cursor: pointer; margin: 0 auto 1rem; transition: transform 0.2s; box-shadow: 0 0 40px rgba(212,100,122,0.45); }
+  .play-btn:hover { transform: scale(1.08); }
+  .video-placeholder h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; color: white; margin-bottom: 0.4rem; }
+  .video-placeholder p { font-size: 0.83rem; color: rgba(255,255,255,0.45); }
+  .video-info { color: white; }
+  .video-info h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .video-info p { font-size: 0.86rem; color: rgba(255,255,255,0.6); line-height: 1.65; margin-bottom: 1.5rem; }
+  .video-actions { display: flex; gap: 1rem; }
+  .btn-video { padding: 0.72rem 1.7rem; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.88rem; cursor: pointer; transition: all 0.2s; border: none; }
+  .btn-video.primary { background: var(--rose); color: white; }
+  .btn-video.primary:hover { background: var(--blush); color: var(--deep); }
+  .btn-video.ghost { background: rgba(255,255,255,0.1); color: white; }
+  .btn-video.ghost:hover { background: rgba(255,255,255,0.17); }
+  .video-sidebar { background: rgba(0,0,0,0.3); padding: 1.8rem 1.4rem; border-left: 1px solid rgba(255,255,255,0.06); overflow-y: auto; }
+  .video-sidebar h3 { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: white; margin-bottom: 1.1rem; }
+  .lesson-list { list-style: none; }
+  .lesson-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.85rem; border-radius: 10px; cursor: pointer; transition: background 0.15s; margin-bottom: 0.3rem; }
+  .lesson-item:hover { background: rgba(255,255,255,0.06); }
+  .lesson-item.active { background: rgba(212,100,122,0.18); }
+  .lesson-dot { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.62rem; font-weight: 700; flex-shrink: 0; }
+  .dot-done { background: var(--rose); color: white; }
+  .dot-current { background: var(--blush); color: var(--deep); }
+  .dot-pending { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.45); }
+  .lesson-label { font-size: 0.8rem; color: rgba(255,255,255,0.7); }
+  .lesson-item.active .lesson-label { color: white; font-weight: 500; }
+  .lesson-duration { font-size: 0.7rem; color: rgba(255,255,255,0.3); margin-left: auto; }
+
+  .modal-overlay { display: none; position: fixed; inset: 0; z-index: 300; background: rgba(26,10,16,0.85); backdrop-filter: blur(8px); align-items: center; justify-content: center; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: white; border-radius: 26px; padding: 2.4rem; max-width: 480px; width: 90%; position: relative; animation: modalIn 0.3s ease; }
+  @keyframes modalIn { from { opacity:0; transform: scale(0.95) translateY(18px); } to { opacity:1; transform: scale(1) translateY(0); } }
+  .modal-close { position: absolute; top: 1.1rem; right: 1.1rem; background: var(--warm); border: none; width: 34px; height: 34px; border-radius: 50%; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s; }
+  .modal-close:hover { background: var(--blush); }
+  .modal h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; margin-bottom: 0.4rem; }
+  .modal .subtitle { font-size: 0.86rem; color: var(--muted); margin-bottom: 1.5rem; }
+  .quiz-q { font-weight: 600; font-size: 0.93rem; margin-bottom: 1rem; }
+  .quiz-options { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 1.4rem; }
+  .quiz-opt { padding: 0.82rem 1.2rem; border-radius: 12px; border: 2px solid rgba(212,100,122,0.18); background: var(--warm); cursor: pointer; font-size: 0.86rem; transition: all 0.15s; text-align: left; }
+  .quiz-opt:hover { border-color: var(--rose); background: #fde8ec; }
+  .quiz-opt.correct { border-color: #22c55e; background: #f0fdf4; color: #166534; }
+  .quiz-opt.incorrect { border-color: var(--rose); background: #fde8ec; color: #9b1c1c; }
+  .quiz-feedback { font-size: 0.83rem; padding: 0.75rem; border-radius: 10px; margin-bottom: 1rem; }
+  .feedback-good { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+  .feedback-bad { background: #fde8ec; color: #9b1c1c; border: 1px solid #fecdd3; }
+  .form-group { margin-bottom: 1.1rem; }
+  .form-group label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 0.35rem; }
+  .form-group input, .form-group select { width: 100%; padding: 0.78rem 1rem; border: 2px solid rgba(212,100,122,0.18); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; background: var(--warm); outline: none; transition: border-color 0.15s; }
+  .form-group input:focus, .form-group select:focus { border-color: var(--rose); background: white; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .modal.modal-parent h2 { color: var(--navy); }
+  .modal.modal-parent .form-group input:focus, .modal.modal-parent .form-group select:focus { border-color: #4a7fc1; }
+  .modal.modal-greek h2 { color: var(--greek-purple); }
+  .modal.modal-greek .form-group input:focus, .modal.modal-greek .form-group select:focus { border-color: var(--greek-mid); }
+
+  .toast { position: fixed; bottom: 2rem; right: 2rem; z-index: 400; background: var(--deep); color: white; padding: 0.95rem 1.4rem; border-radius: 12px; font-size: 0.86rem; display: flex; align-items: center; gap: 0.65rem; box-shadow: 0 8px 28px rgba(0,0,0,0.25); transform: translateY(100px); opacity: 0; transition: all 0.35s ease; }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast .t-icon { font-size: 1.1rem; }
+
+  footer { background: var(--deep); color: white; padding: 2.8rem 3rem; text-align: center; }
+  footer .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 700; color: var(--blush); display: block; margin-bottom: 0.9rem; cursor: pointer; }
+  footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--blush); border-radius: 50px; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .hero, .parent-hero, .greek-hero { padding: 3.5rem 1.5rem 3rem; }
+    section, .parent-section, .greek-section { padding: 3.5rem 1.5rem; }
+    .dash-layout { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .video-layout { grid-template-columns: 1fr; }
+    .video-sidebar { display: none; }
+    .form-row { grid-template-columns: 1fr; }
+    .audience-bar { padding: 0 0.5rem; }
+    .aud-btn { font-size: 0.7rem; }
+  }
+</style>
 </head>
 <body>
-    <header class="header">
-        <div class="header-content">
-            <div class="logo">
-                <span>🛡️</span>
-                <span>Splice</span>
-            </div>
-            <nav class="nav">
-                <a href="#training">Training</a>
-                <a href="#products">Products</a>
-                <a href="#community">Community</a>
-                <div class="user-info">
-                    <span>👤 Sarah M.</span>
-                    <span>Premium Member</span>
-                </div>
-            </nav>
-        </div>
-    </header>
 
-    <div class="container">
-        <section class="hero">
-            <h1>Empower Yourself. Stay Safe. Join the Community.</h1>
-            <p>Learn essential self-defense skills from expert instructors, connect with a supportive community of college women, and access recommended safety products—all in one place.</p>
-        </section>
+<!-- AUDIENCE SWITCHER -->
+<div class="audience-bar">
+  <button class="aud-btn active-student" id="aud-student" onclick="switchAudience('student')">🎓 For Students</button>
+  <div class="aud-divider"></div>
+  <button class="aud-btn" id="aud-parent" onclick="switchAudience('parent')">🏡 For Parents</button>
+  <div class="aud-divider"></div>
+  <button class="aud-btn" id="aud-greek" onclick="switchAudience('greek')">🏛️ Greek Chapters</button>
+</div>
 
-        <div class="progress-banner">
-            <div class="progress-header">
-                <div>
-                    <h2>Your Training Progress</h2>
-                    <p>Complete all modules to enter our monthly giveaway!</p>
-                </div>
-                <div style="text-align: right;">
-                    <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color);">62%</div>
-                    <div style="color: #666;">8 of 13 lessons completed</div>
-                </div>
-            </div>
-            <div class="progress-bar-container">
-                <div class="progress-bar" style="width: 62%;">62%</div>
-            </div>
-            
-            <div class="incentive-box">
-                <h3>🎁 Monthly Completion Giveaway</h3>
-                <p>Complete all training modules by the end of the month and you'll be entered to win!</p>
-                <div class="prize-options">
-                    <div class="prize-option">
-                        <h4>$50 Ulta</h4>
-                        <p>Gift Card</p>
-                    </div>
-                    <div class="prize-option">
-                        <h4>$50 Starbucks</h4>
-                        <p>Gift Card</p>
-                    </div>
-                    <div class="prize-option">
-                        <h4>Premium Splice</h4>
-                        <p>Device Kit</p>
-                    </div>
-                </div>
-                <p style="margin-top: 1rem; font-size: 0.85rem;">5 more lessons to go! Winners announced the 1st of every month.</p>
-            </div>
-        </div>
+<!-- NAV -->
+<nav class="nav-student" id="main-nav">
+  <div class="logo logo-student" id="nav-logo" onclick="goHome()">Splice<span>.</span></div>
+  <div id="nav-right">
+    <button class="nav-cta cta-student" id="nav-cta-btn" onclick="openSignup('student')">Start Free Trial</button>
+  </div>
+</nav>
 
-        <div class="subscription-banner">
-            <h2>Not a member yet?</h2>
-            <p>Join thousands of college women learning to protect themselves</p>
-            <div class="subscription-plans">
-                <div class="plan-card">
-                    <h3>Monthly</h3>
-                    <div class="plan-price">$9.99<span style="font-size: 1rem;">/mo</span></div>
-                    <ul class="plan-features">
-                        <li>✓ All training videos</li>
-                        <li>✓ Community access</li>
-                        <li>✓ Monthly giveaways</li>
-                        <li>✓ Product discounts</li>
-                    </ul>
-                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Get Started</button>
-                </div>
-                <div class="plan-card" style="border: 3px solid gold;">
-                    <div style="background: gold; color: #000; padding: 0.3rem; margin: -1.5rem -1.5rem 1rem -1.5rem; font-weight: bold;">BEST VALUE</div>
-                    <h3>Annual</h3>
-                    <div class="plan-price">$89.99<span style="font-size: 1rem;">/yr</span></div>
-                    <p style="color: var(--success-color); font-weight: bold; margin-bottom: 0.5rem;">Save $30!</p>
-                    <ul class="plan-features">
-                        <li>✓ All training videos</li>
-                        <li>✓ Community access</li>
-                        <li>✓ Monthly giveaways</li>
-                        <li>✓ 15% product discounts</li>
-                        <li>✓ Exclusive webinars</li>
-                    </ul>
-                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Get Started</button>
-                </div>
-            </div>
-        </div>
+<!-- ==================== STUDENT VIEW ==================== -->
+<div id="student-view" class="view active">
 
-        <div class="tabs">
-            <button class="tab active" onclick="switchTab('training')">📚 Training Library</button>
-            <button class="tab" onclick="switchTab('products')">🛒 Recommended Products</button>
-            <button class="tab" onclick="switchTab('community')">👥 Community</button>
-        </div>
-
-        <div id="training-tab" class="tab-content active">
-            <h2 style="margin-bottom: 1.5rem;">Self-Defense Training Modules</h2>
-            
-            <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Foundation Series</h3>
-            <div class="video-grid">
-                <div class="video-card" onclick="openVideo('Situational Awareness', 'Foundation', 12, true)">
-                    <div class="video-thumbnail">
-                        <div class="play-button">▶</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Situational Awareness 101</div>
-                        <div class="video-duration">⏱️ 12 minutes</div>
-                        <div class="video-description">Learn to identify potential threats before they escalate</div>
-                        <div class="video-status">
-                            <span class="status-badge completed">✓ Completed</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card" onclick="openVideo('Personal Space & Boundaries', 'Foundation', 15, true)">
-                    <div class="video-thumbnail">
-                        <div class="play-button">▶</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Personal Space & Boundaries</div>
-                        <div class="video-duration">⏱️ 15 minutes</div>
-                        <div class="video-description">Understanding and maintaining safe distances</div>
-                        <div class="video-status">
-                            <span class="status-badge completed">✓ Completed</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card" onclick="openVideo('Verbal De-escalation', 'Foundation', 18, true)">
-                    <div class="video-thumbnail">
-                        <div class="play-button">▶</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Verbal De-escalation Techniques</div>
-                        <div class="video-duration">⏱️ 18 minutes</div>
-                        <div class="video-description">Use your voice as your first line of defense</div>
-                        <div class="video-status">
-                            <span class="status-badge completed">✓ Completed</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">Physical Defense Techniques</h3>
-            <div class="video-grid">
-                <div class="video-card" onclick="openVideo('Breaking Grabs & Holds', 'Physical', 25, true)">
-                    <div class="video-thumbnail">
-                        <div class="play-button">▶</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Breaking Grabs & Holds</div>
-                        <div class="video-duration">⏱️ 25 minutes</div>
-                        <div class="video-description">Escape common restraint scenarios</div>
-                        <div class="video-status">
-                            <span class="status-badge completed">✓ Completed</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card" onclick="openVideo('Ground Defense Basics', 'Physical', 30, true)">
-                    <div class="video-thumbnail">
-                        <div class="play-button">▶</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Ground Defense Basics</div>
-                        <div class="video-duration">⏱️ 30 minutes</div>
-                        <div class="video-description">Essential skills when taken to the ground</div>
-                        <div class="video-status">
-                            <span class="status-badge in-progress">In Progress</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card" onclick="openVideo('Striking Techniques', 'Physical', 28, false)">
-                    <div class="video-thumbnail">
-                        <div class="play-button">▶</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Effective Striking Techniques</div>
-                        <div class="video-duration">⏱️ 28 minutes</div>
-                        <div class="video-description">Maximize impact with proper technique</div>
-                        <div class="video-status">
-                            <span class="status-badge locked">🔒 Complete previous lesson</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">Tool-Based Defense</h3>
-            <div class="video-grid">
-                <div class="video-card" onclick="openVideo('Pepper Spray Mastery', 'Tools', 20, true)">
-                    <div class="video-thumbnail">
-                        <div class="play-button">▶</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Pepper Spray Mastery</div>
-                        <div class="video-duration">⏱️ 20 minutes</div>
-                        <div class="video-description">Proper deployment and wind considerations</div>
-                        <div class="video-status">
-                            <span class="status-badge completed">✓ Completed</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card" onclick="openVideo('Using Personal Alarms', 'Tools', 10, true)">
-                    <div class="video-thumbnail">
-                        <div class="play-button">▶</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Using Personal Alarms Effectively</div>
-                        <div class="video-duration">⏱️ 10 minutes</div>
-                        <div class="video-description">When and how to deploy alarm systems</div>
-                        <div class="video-status">
-                            <span class="status-badge completed">✓ Completed</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card" onclick="openVideo('Splice Device Tutorial', 'Tools', 35, true)">
-                    <div class="video-thumbnail">
-                        <div class="play-button">▶</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Complete Splice Device Tutorial</div>
-                        <div class="video-duration">⏱️ 35 minutes</div>
-                        <div class="video-description">Master all features of your Splice tool</div>
-                        <div class="video-status">
-                            <span class="status-badge completed">✓ Completed</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card" onclick="openVideo('Everyday Items', 'Tools', 22, false)">
-                    <div class="video-thumbnail">
-                        <div class="play-button">▶</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Everyday Items as Defense Tools</div>
-                        <div class="video-duration">⏱️ 22 minutes</div>
-                        <div class="video-description">Keys, pens, phones—use what you have</div>
-                        <div class="video-status">
-                            <span class="status-badge locked">🔒 Locked</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">Campus-Specific Safety</h3>
-            <div class="video-grid">
-                <div class="video-card" onclick="openVideo('Walking Alone Safely', 'Campus', 16, false)">
-                    <div class="video-thumbnail">
-                        <div class="play-button">▶</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Walking Alone Safely at Night</div>
-                        <div class="video-duration">⏱️ 16 minutes</div>
-                        <div class="video-description">Navigate campus safely after dark</div>
-                        <div class="video-status">
-                            <span class="status-badge locked">🔒 Locked</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card" onclick="openVideo('Dorm Safety', 'Campus', 18, false)">
-                    <div class="video-thumbnail">
-                        <div class="play-button">▶</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Dorm & Apartment Safety</div>
-                        <div class="video-duration">⏱️ 18 minutes</div>
-                        <div class="video-description">Secure your living space</div>
-                        <div class="video-status">
-                            <span class="status-badge locked">🔒 Locked</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card" onclick="openVideo('Party Safety', 'Campus', 24, false)">
-                    <div class="video-thumbnail">
-                        <div class="play-button">▶</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Party & Social Event Safety</div>
-                        <div class="video-duration">⏱️ 24 minutes</div>
-                        <div class="video-description">Stay safe in social settings</div>
-                        <div class="video-status">
-                            <span class="status-badge locked">🔒 Locked</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card" onclick="openVideo('Bystander Intervention', 'Campus', 20, false)">
-                    <div class="video-thumbnail">
-                        <div class="play-button">▶</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Bystander Intervention Strategies</div>
-                        <div class="video-duration">⏱️ 20 minutes</div>
-                        <div class="video-description">Help others stay safe</div>
-                        <div class="video-status">
-                            <span class="status-badge locked">🔒 Locked</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="products-tab" class="tab-content">
-            <h2 style="margin-bottom: 1rem;">Recommended Safety Products</h2>
-            <p style="margin-bottom: 2rem; color: #666;">Premium members get 15% off all products!</p>
-            
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="product-image">🛡️</div>
-                    <div class="product-info">
-                        <div class="product-name">Splice Premium Kit</div>
-                        <div class="product-price">$89.99 <span style="font-size: 0.9rem; color: #999; text-decoration: line-through;">$105.99</span></div>
-                        <div class="product-description">Our flagship 3-in-1 defense system with alarm, pepper spray, and campus-compliant blade.</div>
-                        <ul class="product-features">
-                            <li>130dB personal alarm</li>
-                            <li>Police-grade pepper spray</li>
-                            <li>3.5" safety blade</li>
-                            <li>Sleek keychain design</li>
-                            <li>Includes training videos</li>
-                        </ul>
-                        <button class="btn btn-primary" style="width: 100%;">Add to Cart</button>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-image">🔔</div>
-                    <div class="product-info">
-                        <div class="product-name">Splice Alarm Only</div>
-                        <div class="product-price">$24.99</div>
-                        <div class="product-description">Compact personal alarm perfect for quick deployment in emergency situations.</div>
-                        <ul class="product-features">
-                            <li>130dB siren</li>
-                            <li>LED strobe light</li>
-                            <li>Replaceable battery</li>
-                            <li>Multiple color options</li>
-                        </ul>
-                        <button class="btn btn-primary" style="width: 100%;">Add to Cart</button>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-image">💨</div>
-                    <div class="product-info">
-                        <div class="product-name">Premium Pepper Spray</div>
-                        <div class="product-price">$19.99</div>
-                        <div class="product-description">Maximum strength pepper spray with UV marking dye and 12-foot range.</div>
-                        <ul class="product-features">
-                            <li>10% OC concentration</li>
-                            <li>20 bursts per canister</li>
-                            <li>UV marking dye</li>
-                            <li>Practice spray included</li>
-                        </ul>
-                        <button class="btn btn-primary" style="width: 100%;">Add to Cart</button>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-image">🎒</div>
-                    <div class="product-info">
-                        <div class="product-name">Safety Essentials Bundle</div>
-                        <div class="product-price">$149.99 <span style="font-size: 0.9rem; color: #999; text-decoration: line-through;">$180.00</span></div>
-                        <div class="product-description">Complete safety kit with Splice Premium, door alarm, and emergency whistle.</div>
-                        <ul class="product-features">
-                            <li>Splice Premium Kit</li>
-                            <li>Door stop alarm</li>
-                            <li>Emergency whistle</li>
-                            <li>Reflective keychain</li>
-                            <li>Safety guide booklet</li>
-                        </ul>
-                        <button class="btn btn-primary" style="width: 100%;">Add to Cart</button>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-image">🔦</div>
-                    <div class="product-info">
-                        <div class="product-name">Tactical Flashlight</div>
-                        <div class="product-price">$34.99</div>
-                        <div class="product-description">1200-lumen tactical flashlight with strobe mode and reinforced striking bezel.</div>
-                        <ul class="product-features">
-                            <li>1200 lumen output</li>
-                            <li>5 light modes</li>
-                            <li>Strobe function</li>
-                            <li>Waterproof design</li>
-                        </ul>
-                        <button class="btn btn-primary" style="width: 100%;">Add to Cart</button>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-image">📱</div>
-                    <div class="product-info">
-                        <div class="product-name">Personal Safety App (1 Year)</div>
-                        <div class="product-price">$49.99/yr</div>
-                        <div class="product-description">GPS tracking, emergency contacts, and automatic check-in reminders.</div>
-                        <ul class="product-features">
-                            <li>Live GPS sharing</li>
-                            <li>One-tap emergency alert</li>
-                            <li>Automatic check-ins</li>
-                            <li>Campus safety map</li>
-                        </ul>
-                        <button class="btn btn-primary" style="width: 100%;">Subscribe</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="community-tab" class="tab-content">
-            <div class="community-section">
-                <h2 style="margin-bottom: 1rem;">Join the Splice Community</h2>
-                <p style="margin-bottom: 2rem; color: #666;">Connect with thousands of college women learning to protect themselves and each other.</p>
-                
-                <div class="community-stats">
-                    <div class="stat-card">
-                        <div class="stat-number">12,847</div>
-                        <div class="stat-label">Active Members</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">247</div>
-                        <div class="stat-label">College Campuses</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">98%</div>
-                        <div class="stat-label">Feel More Confident</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">156k</div>
-                        <div class="stat-label">Training Hours Completed</div>
-                    </div>
-                </div>
-
-                <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">Recent Success Stories</h3>
-                
-                <div style="background: var(--light-color); padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem;">
-                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                        <div style="width: 50px; height: 50px; background: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">JM</div>
-                        <div>
-                            <div style="font-weight: bold;">Jessica M. - University of Alabama</div>
-                            <div style="color: #666; font-size: 0.9rem;">2 days ago</div>
-                        </div>
-                    </div>
-                    <p>"The verbal de-escalation techniques I learned here literally got me out of an uncomfortable situation last week. I can't thank this community enough for giving me the confidence to speak up and set boundaries."</p>
-                </div>
-
-                <div style="background: var(--light-color); padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem;">
-                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                        <div style="width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">AL</div>
-                        <div>
-                            <div style="font-weight: bold;">Amanda L. - Auburn University</div>
-                            <div style="color: #666; font-size: 0.9rem;">5 days ago</div>
-                        </div>
-                    </div>
-                    <p>"I completed all the training modules and won the Ulta gift card last month! But honestly, the confidence I gained is worth way more than $50. This platform has changed how I move through the world."</p>
-                </div>
-
-                <div style="background: var(--light-color); padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem;">
-                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                        <div style="width: 50px; height: 50px; background: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">RK</div>
-                        <div>
-                            <div style="font-weight: bold;">Rachel K. - University of Georgia</div>
-                            <div style="color: #666; font-size: 0.9rem;">1 week ago</div>
-                        </div>
-                    </div>
-                    <p>"My roommate and I both joined and practice together. Having a training partner makes such a difference. The Splice device is now part of my everyday carry—sleek enough that I actually use it!"</p>
-                </div>
-
-                <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">Upcoming Community Events</h3>
-                
-                <div style="display: grid; gap: 1rem;">
-                    <div style="background: white; border-left: 4px solid var(--primary-color); padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                        <div style="font-weight: bold; margin-bottom: 0.5rem;">Virtual Self-Defense Workshop</div>
-                        <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">📅 February 20, 2026 • 7:00 PM EST</div>
-                        <p style="font-size: 0.9rem; color: #666;">Live practice session with certified instructor. Bring questions!</p>
-                        <button class="btn btn-secondary" style="margin-top: 1rem;">Register</button>
-                    </div>
-
-                    <div style="background: white; border-left: 4px solid var(--accent-color); padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                        <div style="font-weight: bold; margin-bottom: 0.5rem;">Campus Safety Panel Discussion</div>
-                        <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">📅 February 27, 2026 • 6:00 PM EST</div>
-                        <p style="font-size: 0.9rem; color: #666;">Featuring campus police, survivors, and safety experts.</p>
-                        <button class="btn btn-secondary" style="margin-top: 1rem;">Register</button>
-                    </div>
-
-                    <div style="background: white; border-left: 4px solid var(--primary-color); padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                        <div style="font-weight: bold; margin-bottom: 0.5rem;">Monthly Q&A with Instructors</div>
-                        <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">📅 March 5, 2026 • 8:00 PM EST</div>
-                        <p style="font-size: 0.9rem; color: #666;">Get your questions answered by our expert team.</p>
-                        <button class="btn btn-secondary" style="margin-top: 1rem;">Register</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-pattern"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">🛡️ For College Women, By Design</div>
+      <h1>Be Prepared.<br>Be Confident.<br><em>Be Splice.</em></h1>
+      <p>The first self-defense platform built specifically for college women. Learn real skills, carry real tools, and earn real rewards — all in one place.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="openSignup('student')">Start Free Trial</button>
+        <button class="btn-secondary" onclick="showView('dashboard')">Explore Courses ↓</button>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">1 in 3</div><div class="stat-label">Women experience<br>violence in their lifetime</div></div>
+        <div><div class="stat-num">74%</div><div class="stat-label">Higher risk for<br>college-enrolled women</div></div>
+        <div><div class="stat-num">80%</div><div class="stat-label">Risk reduction with<br>self-defense training</div></div>
+      </div>
     </div>
+  </section>
 
-    <div id="videoModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modalTitle">Lesson Title</h2>
-                <button class="close-modal" onclick="closeModal()">&times;</button>
-            </div>
-            <div class="video-player">
-                <div style="text-align: center;">
-                    <div style="font-size: 4rem; margin-bottom: 1rem;">▶️</div>
-                    <div>Video Player</div>
-                    <div style="font-size: 0.9rem; opacity: 0.7; margin-top: 0.5rem;">In a production environment, this would be a real video player</div>
-                </div>
-            </div>
-            <div id="modalDescription" style="margin: 1rem 0; color: #666;"></div>
-            <div id="modalDuration" style="margin: 0.5rem 0; color: #666;"></div>
-            <button id="completeBtn" class="btn btn-primary complete-lesson-btn" onclick="completeLesson()">
-                Mark as Complete ✓
-            </button>
-            <div style="margin-top: 1rem; padding: 1rem; background: var(--light-color); border-radius: 5px;">
-                <h4 style="margin-bottom: 0.5rem;">💡 Quick Tip</h4>
-                <p style="font-size: 0.9rem; color: #666;">Practice makes perfect! Review this video multiple times and try the techniques in a safe environment before you need them.</p>
-            </div>
-        </div>
+  <section class="how-section">
+    <div style="max-width:1080px;margin:0 auto">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title">Three steps to a safer you</h2>
+      <div class="steps-grid">
+        <div class="step-card"><div class="step-num">1</div><h3>Subscribe & Gear Up</h3><p>Choose your plan, receive your Splice device, and unlock your training dashboard immediately.</p></div>
+        <div class="step-card"><div class="step-num">2</div><h3>Train at Your Pace</h3><p>Work through structured modules on situational awareness, de-escalation, physical defense, and device mastery.</p></div>
+        <div class="step-card"><div class="step-num">3</div><h3>Earn Real Rewards</h3><p>Complete modules and pass knowledge checks to unlock gift cards to Ulta, Starbucks, and brands you love.</p></div>
+        <div class="step-card"><div class="step-num">4</div><h3>Join the Community</h3><p>Connect with thousands of college women building confidence together. Share tips, cheer each other on, stay safe.</p></div>
+      </div>
     </div>
+  </section>
 
-    <script>
-        function switchTab(tabName) {
-            // Hide all tab contents
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => content.classList.remove('active'));
-            
-            // Remove active class from all tabs
-            const tabs = document.querySelectorAll('.tab');
-            tabs.forEach(tab => tab.classList.remove('active'));
-            
-            // Show selected tab content
-            document.getElementById(tabName + '-tab').classList.add('active');
-            
-            // Add active class to clicked tab
-            event.target.classList.add('active');
-        }
+  <section style="padding:5.5rem 3rem; background:white">
+    <div style="max-width:1080px;margin:0 auto">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:2.8rem">
+        <div><div class="section-label">Curriculum</div><h2 class="section-title">What you'll master</h2></div>
+        <button class="btn-primary" onclick="showView('dashboard')">View Full Curriculum →</button>
+      </div>
+      <div class="courses-grid">
+        <div class="course-card" onclick="openSignup('student')"><div class="course-thumb" style="background:linear-gradient(135deg,#fde8ec,#f2b5c0)">👁️</div><div class="course-body"><div class="course-badge">Module 1 — Free</div><h3>Situational Awareness</h3><p>Learn to read your environment and identify threats early before anything escalates.</p><div class="course-meta"><span>📹 4 lessons</span><span>⏱ 25 min</span></div></div></div>
+        <div class="course-card" onclick="openSignup('student')"><div class="course-thumb" style="background:linear-gradient(135deg,#f5e6d3,#c9944a22)">🗣️</div><div class="course-body"><div class="course-badge">Module 2</div><h3>De-escalation & Escape</h3><p>Master verbal and non-verbal techniques to defuse tension and create exits.</p><div class="course-meta"><span>📹 5 lessons</span><span>⏱ 30 min</span></div></div></div>
+        <div class="course-card" onclick="openSignup('student')"><div class="course-thumb" style="background:linear-gradient(135deg,#fde8ec,#d4647a22)">✊</div><div class="course-body"><div class="course-badge">Module 3</div><h3>Physical Defense Basics</h3><p>Essential strikes, blocks, and release techniques — no martial arts experience needed.</p><div class="course-meta"><span>📹 6 lessons</span><span>⏱ 45 min</span></div></div></div>
+        <div class="course-card" onclick="openSignup('student')"><div class="course-thumb" style="background:linear-gradient(135deg,#1a0a1022,#d4647a33)">🔑</div><div class="course-body"><div class="course-badge">Module 4 — Device</div><h3>Mastering Your Splice</h3><p>A complete walkthrough of all three layers of Splice protection — alarm, pepper spray, blade.</p><div class="course-meta"><span>📹 5 lessons</span><span>⏱ 35 min</span></div></div></div>
+      </div>
+    </div>
+  </section>
 
-        function openVideo(title, category, duration, unlocked) {
-            if (!unlocked) {
-                alert('Please complete the previous lessons to unlock this content!');
-                return;
-            }
-            
-            const modal = document.getElementById('videoModal');
-            document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalDescription').textContent = 'Category: ' + category;
-            document.getElementById('modalDuration').textContent = 'Duration: ' + duration + ' minutes';
-            modal.classList.add('active');
-        }
+  <section class="rewards-section">
+    <div style="max-width:1080px;margin:0 auto">
+      <div class="section-label">Rewards Program</div>
+      <h2 class="section-title">Learn. Train. Get rewarded.</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,0.6)">We believe staying safe should come with a little something extra. Complete modules and pass quizzes to unlock real gift cards.</p>
+      <div class="rewards-grid">
+        <div class="reward-card"><div class="reward-icon">☕</div><h3>Starbucks Gift Card</h3><p>Complete Module 1 + quiz</p><div class="reward-val">$5 reward</div></div>
+        <div class="reward-card"><div class="reward-icon">💄</div><h3>Ulta Beauty Gift Card</h3><p>Complete all 4 core modules</p><div class="reward-val">$15 reward</div></div>
+        <div class="reward-card"><div class="reward-icon">🛍️</div><h3>Amazon Gift Card</h3><p>Refer 2 friends who subscribe</p><div class="reward-val">$10 reward</div></div>
+        <div class="reward-card"><div class="reward-icon">🏆</div><h3>Champion Bundle</h3><p>All modules + community challenge</p><div class="reward-val">$25 bundle</div></div>
+      </div>
+    </div>
+  </section>
 
-        function closeModal() {
-            const modal = document.getElementById('videoModal');
-            modal.classList.remove('active');
-        }
+  <section style="padding:5.5rem 3rem;background:var(--cream)">
+    <div style="max-width:1080px;margin:0 auto;text-align:center">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">Simple, transparent plans</h2>
+      <p class="section-sub" style="margin:0 auto">Start free, go deeper when you're ready. Every plan includes community access and mobile app.</p>
+      <div class="pricing-grid" style="margin-top:3rem">
+        <div class="price-card"><div class="plan-name">Free Trial</div><div class="plan-sub">Try before you commit</div><div class="plan-price"><sup>$</sup>0<span>/mo</span></div><ul class="plan-features"><li><span class="check">✓</span>Module 1 full access</li><li><span class="check">✓</span>Community access</li><li><span class="check">✓</span>Splice device demo video</li><li><span class="check">✓</span>$5 Starbucks reward eligible</li></ul><button class="plan-btn" onclick="openSignup('student')">Get Started Free</button></div>
+        <div class="price-card featured"><div class="popular-tag">Most Popular</div><div class="plan-name">Student</div><div class="plan-sub">Everything you need</div><div class="plan-price"><sup>$</sup>9<span>/mo</span></div><ul class="plan-features"><li><span class="check">✓</span>All 6 training modules</li><li><span class="check">✓</span>Splice device included</li><li><span class="check">✓</span>Full rewards program</li><li><span class="check">✓</span>Live Q&A sessions</li><li><span class="check">✓</span>Campus safety resource hub</li></ul><button class="plan-btn" onclick="openSignup('student')">Start Student Plan</button></div>
+        <div class="price-card"><div class="plan-name">Squad</div><div class="plan-sub">For you + 4 friends</div><div class="plan-price"><sup>$</sup>29<span>/mo</span></div><ul class="plan-features"><li><span class="check">✓</span>5 Student accounts</li><li><span class="check">✓</span>5 Splice devices</li><li><span class="check">✓</span>Group challenges & rewards</li><li><span class="check">✓</span>Priority support</li></ul><button class="plan-btn" onclick="openSignup('student')">Build Your Squad</button></div>
+      </div>
+    </div>
+  </section>
 
-        function completeLesson() {
-            alert('🎉 Lesson completed! You\'re one step closer to winning this month\'s giveaway!');
-            closeModal();
-        }
+  <section class="testimonials-section">
+    <div style="max-width:1080px;margin:0 auto">
+      <div class="section-label">Community</div>
+      <h2 class="section-title">Women who feel the difference</h2>
+      <div class="testi-grid">
+        <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">"I used to avoid walking to my car at night. After Module 3, I walk differently — not just more carefully, but more confidently. That shift in mindset is priceless."</p><div class="testi-author">Madison T.</div><div class="testi-school">University of Alabama, Junior</div></div>
+        <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">"The Starbucks gift card was a fun bonus, but honestly the real reward was knowing I have actual skills now. The situational awareness module changed how I see the world."</p><div class="testi-author">Priya K.</div><div class="testi-school">Georgia Tech, Sophomore</div></div>
+        <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">"My whole sorority chapter signed up for the squad plan. Our GroupMe is filled with safety tips now. We look out for each other so differently."</p><div class="testi-author">Chloe R.</div><div class="testi-school">Ole Miss, Senior</div></div>
+      </div>
+    </div>
+  </section>
 
-        // Close modal when clicking outside
-        document.getElementById('videoModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-    </script>
+  <section style="background:var(--rose);padding:4rem 3rem;text-align:center">
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.6rem;color:white;margin-bottom:1rem;font-weight:700">Your safety starts today.</h2>
+    <p style="color:rgba(255,255,255,0.8);margin-bottom:2rem;font-size:1rem">Join thousands of college women building confidence on and off campus.</p>
+    <button class="btn-secondary" style="border-color:white;color:white;font-size:0.95rem;padding:0.95rem 2.5rem" onclick="openSignup('student')">Get Started — It's Free</button>
+  </section>
+
+  <footer><span class="logo" onclick="goHome()">Splice.</span><p>© 2025 Splice Safety, LLC · University of Alabama · hello@splicethis.com</p><p style="margin-top:0.3rem">Empowering women through education, community, and innovation.</p></footer>
+</div>
+
+
+<!-- ==================== PARENT VIEW ==================== -->
+<div id="parent-view" class="view">
+
+  <div class="parent-hero">
+    <div class="parent-hero-deco"></div>
+    <div class="greek-badge-ring" style="right:8%;background:rgba(74,127,193,0.08);border-color:rgba(74,127,193,0.15)">🛡️</div>
+    <div class="parent-hero-content">
+      <div class="parent-eyebrow">🏡 For Parents & Families</div>
+      <h1>Give Her the Gift<br>of <em>Confidence.</em></h1>
+      <p>As a parent, you can't always be there. But with Splice, you can ensure your daughter has the skills, tools, and community to stay safe — wherever college takes her.</p>
+      <div class="parent-actions">
+        <button class="btn-parent-primary" onclick="openSignup('parent')">Gift Splice Now</button>
+        <button class="btn-parent-ghost" onclick="document.getElementById('parent-how').scrollIntoView({behavior:'smooth'})">Learn How It Works ↓</button>
+      </div>
+      <div class="parent-trust-bar">
+        <div class="trust-item"><div class="t-num">50K+</div><div class="t-label">Students<br>protected</div></div>
+        <div class="trust-item"><div class="t-num">4.9★</div><div class="t-label">Average<br>parent rating</div></div>
+        <div class="trust-item"><div class="t-num">80%</div><div class="t-label">Risk reduction<br>with training</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="parent-how" class="parent-section parent-section-light">
+    <div style="max-width:1080px;margin:0 auto">
+      <div class="section-label">Why Parents Choose Splice</div>
+      <h2 class="section-title">More than a gift.<br>A layer of protection.</h2>
+      <p class="section-sub">Splice gives your daughter real-world skills, a certified safety device, and a community — all delivered through a platform parents trust.</p>
+      <div class="parent-value-grid" style="margin-top:2.5rem">
+        <div class="parent-value-card"><div class="pvc-icon">🎓</div><h3>Expert-Designed Curriculum</h3><p>Our modules are built around real self-defense science — situational awareness, de-escalation, physical defense, and device mastery. No fluff, just skills.</p></div>
+        <div class="parent-value-card"><div class="pvc-icon">📊</div><div class="pvc-num">Progress Insights</div><p>Receive monthly progress emails so you know how your daughter is advancing through the curriculum — without being overbearing.</p></div>
+        <div class="parent-value-card"><div class="pvc-icon">📦</div><h3>Device Delivered to Her Door</h3><p>Every paid plan includes the Splice safety device — alarm, pepper spray, and blade in one discreet tool — shipped directly to her dorm or apartment.</p></div>
+        <div class="parent-value-card"><div class="pvc-icon">💬</div><h3>Parent Community</h3><p>Join our private parent forum to connect with other families, share campus safety resources, and stay informed about college safety trends.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="parent-section parent-section-silver">
+    <div style="max-width:1080px;margin:0 auto">
+      <div class="section-label">The Curriculum</div>
+      <h2 class="section-title">What she'll learn</h2>
+      <p class="section-sub">Six research-backed modules that build real confidence and competence — progressing from mindset to physical skills to device mastery.</p>
+      <div class="courses-grid" style="margin-top:2.5rem">
+        <div class="course-card"><div class="course-thumb" style="background:linear-gradient(135deg,#e8edf5,#c5d6ef)">👁️</div><div class="course-body"><div class="course-badge" style="background:#e8edf5;color:#4a7fc1">Module 1 — Free</div><h3>Situational Awareness</h3><p>Reading environments, identifying threats early, and developing the instincts that prevent most incidents.</p><div class="course-meta"><span>📹 4 lessons</span><span>⏱ 25 min</span></div></div></div>
+        <div class="course-card"><div class="course-thumb" style="background:linear-gradient(135deg,#e8f4e8,#a8d5a2)">🗣️</div><div class="course-body"><div class="course-badge" style="background:#e8f4e8;color:#2d7a2d">Module 2</div><h3>De-escalation & Escape</h3><p>Verbal techniques, boundary-setting, and how to exit dangerous situations before they escalate.</p><div class="course-meta"><span>📹 5 lessons</span><span>⏱ 30 min</span></div></div></div>
+        <div class="course-card"><div class="course-thumb" style="background:linear-gradient(135deg,#fde8ec,#f2b5c0)">✊</div><div class="course-body"><div class="course-badge">Module 3</div><h3>Physical Defense Basics</h3><p>Essential strikes and release techniques adapted from real-world science. No prior experience needed.</p><div class="course-meta"><span>📹 6 lessons</span><span>⏱ 45 min</span></div></div></div>
+        <div class="course-card"><div class="course-thumb" style="background:linear-gradient(135deg,#1a0a1022,#d4647a33)">🔑</div><div class="course-body"><div class="course-badge">Module 4 — Device</div><h3>Mastering the Splice Device</h3><p>Full training on all three protection layers so she's confident using it correctly if she ever needs to.</p><div class="course-meta"><span>📹 5 lessons</span><span>⏱ 35 min</span></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="parent-section parent-section-light">
+    <div style="max-width:1080px;margin:0 auto">
+      <div class="section-label">Gift Plans</div>
+      <h2 class="section-title">Choose her plan</h2>
+      <div class="gifting-box">
+        <div>
+          <h2>Send safety as a gift — instantly.</h2>
+          <p>Choose a plan below, enter her email, and she'll receive a welcome kit with course access and device shipping details within minutes. No account required on your end.</p>
+          <button class="btn-parent-primary" onclick="openSignup('parent')">Send a Gift →</button>
+        </div>
+        <div class="gift-plans">
+          <div class="gift-plan selected" onclick="selectGiftPlan(this)"><div class="gp-left"><h4>Student — Monthly</h4><p>All 6 modules · Splice device included</p></div><div class="gp-price">$9<span style="font-size:0.8rem;color:rgba(255,255,255,0.5)">/mo</span></div></div>
+          <div class="gift-plan" onclick="selectGiftPlan(this)"><div class="gp-left"><h4>Student — Semester</h4><p>4 months prepaid · Save $6</p></div><div class="gp-price">$30<span style="font-size:0.8rem;color:rgba(255,255,255,0.5)">/4mo</span></div></div>
+          <div class="gift-plan" onclick="selectGiftPlan(this)"><div class="gp-left"><h4>Student — Annual</h4><p>12 months prepaid · Save $18</p></div><div class="gp-price">$90<span style="font-size:0.8rem;color:rgba(255,255,255,0.5)">/yr</span></div></div>
+          <div class="gift-plan" onclick="selectGiftPlan(this)"><div class="gp-left"><h4>Squad Gift</h4><p>5 accounts · For her + her friends</p></div><div class="gp-price">$29<span style="font-size:0.8rem;color:rgba(255,255,255,0.5)">/mo</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="parent-section parent-section-navy">
+    <div style="max-width:1080px;margin:0 auto">
+      <div class="section-label">The Reality</div>
+      <h2 class="section-title">Why it matters</h2>
+      <p class="section-sub">The statistics on college campus safety are sobering. Splice was built to change them.</p>
+      <div class="parent-value-grid" style="margin-top:2.5rem">
+        <div class="parent-value-card"><div class="pvc-num">1 in 5</div><h3>Women are sexually assaulted during college</h3><p>Training and awareness significantly reduce vulnerability — and Splice-trained women report feeling markedly more confident navigating campus life.</p></div>
+        <div class="parent-value-card"><div class="pvc-num">90%</div><h3>of incidents happen within 1 mile of campus</h3><p>The parking lot, the walk home, the off-campus party. Splice training specifically targets these high-risk everyday moments.</p></div>
+        <div class="parent-value-card"><div class="pvc-num">3x</div><h3>More likely to report incidents when trained</h3><p>Students with self-defense training are more likely to recognize, report, and recover from threatening situations faster.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="parent-section parent-section-silver">
+    <div style="max-width:1080px;margin:0 auto">
+      <div class="section-label">Parent Reviews</div>
+      <h2 class="section-title">What other parents say</h2>
+      <div class="testi-grid" style="margin-top:2.5rem">
+        <div class="parent-testi-card"><div class="parent-stars">★★★★★</div><p class="testi-text">"My daughter was skeptical at first, but within two weeks she was texting me about awareness techniques she learned. Hearing her talk about exits and safe routes made me feel so much better."</p><div class="testi-author">Karen M.</div><div class="testi-school">Mother of a University of Alabama sophomore</div></div>
+        <div class="parent-testi-card"><div class="parent-stars">★★★★★</div><p class="testi-text">"I gifted this for her birthday and it was the most meaningful gift I've ever given. She finished all six modules and called me after the last one — she sounded genuinely transformed."</p><div class="testi-author">David L.</div><div class="testi-school">Father of an Ole Miss freshman</div></div>
+        <div class="parent-testi-card"><div class="parent-stars">★★★★★</div><p class="testi-text">"The monthly progress emails are a brilliant touch. I can see she's completing modules without having to check in on her constantly. It's peace of mind without the helicopter parenting."</p><div class="testi-author">Susan T.</div><div class="testi-school">Mother of a Georgia Tech junior</div></div>
+      </div>
+    </div>
+  </div>
+
+  <section style="background:#1B2B4B;padding:4rem 3rem;text-align:center">
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.6rem;color:white;margin-bottom:1rem;font-weight:700">Because knowing she's ready<br>changes everything.</h2>
+    <p style="color:rgba(255,255,255,0.6);margin-bottom:2rem;font-size:1rem">Give her the skills, the tool, and the community. Starting at $9/month.</p>
+    <button class="btn-parent-primary" style="font-size:1rem;padding:1rem 2.5rem" onclick="openSignup('parent')">Gift Splice to Your Daughter →</button>
+  </section>
+
+  <footer><span class="logo" onclick="goHome()">Splice.</span><p>© 2025 Splice Safety, LLC · University of Alabama · hello@splicethis.com</p><p style="margin-top:0.3rem">Empowering women through education, community, and innovation.</p></footer>
+</div>
+
+
+<!-- ==================== GREEK VIEW ==================== -->
+<div id="greek-view" class="view">
+
+  <div class="greek-hero">
+    <div class="greek-hero-deco"></div>
+    <div class="greek-badge-ring">🏛️</div>
+    <div class="greek-hero-content">
+      <div class="greek-eyebrow">🏛️ Official Greek Chapter Program</div>
+      <h1>Safety Is a <em>Chapter</em><br><strong>Value.</strong></h1>
+      <p>Splice for Greek Chapters is the only safety training platform designed specifically for sorority-sponsored enrollment — with chapter analytics, co-branded certificates, and bulk pricing that makes protecting every member achievable.</p>
+      <div class="greek-actions">
+        <button class="btn-greek-primary" onclick="openSignup('greek')">Enroll Your Chapter</button>
+        <button class="btn-greek-ghost" onclick="document.getElementById('greek-features').scrollIntoView({behavior:'smooth'})">See Chapter Features ↓</button>
+      </div>
+      <div class="greek-trust-bar">
+        <div><div class="greek-trust-num">120+</div><div class="greek-trust-label">Active Greek<br>chapters</div></div>
+        <div><div class="greek-trust-num">8,000+</div><div class="greek-trust-label">Chapter members<br>trained</div></div>
+        <div><div class="greek-trust-num">4.9★</div><div class="greek-trust-label">Chapter advisor<br>rating</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="greek-features" class="greek-section greek-section-light">
+    <div style="max-width:1080px;margin:0 auto">
+      <div class="section-label">Built for Chapters</div>
+      <h2 class="section-title">Everything your chapter needs.<br>All in one platform.</h2>
+      <p class="section-sub">The Splice Chapter Program goes beyond individual subscriptions — it's a full safety initiative you can run as a chapter, with the tools to manage, track, and celebrate it.</p>
+      <div class="greek-feature-grid" style="margin-top:2.5rem">
+        <div class="greek-feature-card"><div class="gfc-icon">📊</div><h3>Chapter Dashboard</h3><p>Track completion rates, quiz scores, and engagement across every member from a single advisor dashboard. Export reports for your nationals or risk management committee.</p></div>
+        <div class="greek-feature-card"><div class="gfc-icon">🎓</div><h3>Co-Branded Certificates</h3><p>Members who complete the full curriculum receive a Splice × your chapter completion certificate — perfect for recruitment materials and member recognition.</p></div>
+        <div class="greek-feature-card"><div class="gfc-icon">📦</div><h3>Bulk Device Fulfillment</h3><p>Order Splice devices for your full chapter roster at once. We'll ship directly or coordinate a chapter delivery event — whichever fits your chapter calendar.</p></div>
+        <div class="greek-feature-card"><div class="gfc-icon">🏆</div><h3>Chapter Leaderboard & Challenges</h3><p>Run chapter-wide safety challenges with internal leaderboards. Celebrate the members who complete training first with shared recognition and bonus rewards.</p></div>
+        <div class="greek-feature-card"><div class="gfc-icon">💬</div><h3>Advisor Communication Tools</h3><p>Send automated reminders to members who haven't started or completed modules. Keep your chapter engaged without manual follow-up.</p></div>
+        <div class="greek-feature-card"><div class="gfc-icon">📋</div><h3>Risk Management Ready</h3><p>Our chapter curriculum meets or exceeds NPC risk management training recommendations. Documentation provided for your national organization's review.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="greek-section greek-section-white">
+    <div style="max-width:1080px;margin:0 auto">
+      <div class="section-label">Chapter Onboarding</div>
+      <h2 class="section-title">Up and running in 48 hours.</h2>
+      <p class="section-sub">We've made chapter enrollment as simple as possible so advisors can focus on their members, not paperwork.</p>
+      <div class="steps-grid" style="margin-top:2.5rem">
+        <div class="step-card" style="border-color:rgba(74,44,110,0.12)"><div class="step-num" style="background:var(--greek-purple)">1</div><h3>Submit Your Chapter</h3><p>Fill out our chapter intake form with your chapter size, university, and contact info. We'll verify NPC/NIC affiliation within 24 hours.</p></div>
+        <div class="step-card" style="border-color:rgba(74,44,110,0.12)"><div class="step-num" style="background:var(--greek-purple)">2</div><h3>Choose Your Plan</h3><p>Select the plan that fits your chapter size and budget. We offer monthly, semester, and annual billing, and work with chapter dues structures.</p></div>
+        <div class="step-card" style="border-color:rgba(74,44,110,0.12)"><div class="step-num" style="background:var(--greek-purple)">3</div><h3>Invite Your Members</h3><p>We'll generate a custom chapter invite link. Members join with their university email — no additional setup required from the advisor.</p></div>
+        <div class="step-card" style="border-color:rgba(74,44,110,0.12)"><div class="step-num" style="background:var(--greek-purple)">4</div><h3>Track & Celebrate</h3><p>Monitor progress from your advisor dashboard. Schedule a chapter completion event, distribute certificates, and recognize your top members.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="greek-section greek-section-light">
+    <div style="max-width:1080px;margin:0 auto">
+      <div class="section-label">Advisor Dashboard</div>
+      <h2 class="section-title">Full visibility.<br>Zero micromanagement.</h2>
+      <div class="greek-dashboard-preview">
+        <h3>Chapter Overview — Alpha Phi, University of Alabama</h3>
+        <p>A live snapshot of what your advisor dashboard looks like. Track completion, engagement, and rewards in real-time.</p>
+        <div class="dash-mockup">
+          <div class="dash-mock-card"><div class="val">87</div><div class="lbl">Total Members</div></div>
+          <div class="dash-mock-card"><div class="val">63</div><div class="lbl">Modules Started</div></div>
+          <div class="dash-mock-card"><div class="val">41</div><div class="lbl">Fully Certified</div></div>
+          <div class="dash-mock-card"><div class="val">72%</div><div class="lbl">Completion Rate</div></div>
+          <div class="dash-mock-card"><div class="val">4.8★</div><div class="lbl">Avg. Quiz Score</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="greek-section greek-section-purple">
+    <div style="max-width:1080px;margin:0 auto;text-align:center">
+      <div class="section-label">Chapter Plans</div>
+      <h2 class="section-title">Transparent chapter pricing</h2>
+      <p class="section-sub" style="margin:0 auto;color:rgba(255,255,255,0.6)">All plans include the chapter dashboard, co-branded certificates, and advisor tools. Devices billed separately or bundled.</p>
+      <div class="chapter-plans-grid">
+        <div class="chapter-plan"><div class="plan-name" style="color:var(--greek-purple)">Pledge Class</div><div class="plan-sub">Up to 25 members</div><div class="plan-price" style="color:var(--greek-purple)"><sup>$</sup>6<span>/member/mo</span></div><ul class="plan-features"><li><span class="check" style="color:var(--greek-purple)">✓</span>All 6 training modules</li><li><span class="check" style="color:var(--greek-purple)">✓</span>Chapter dashboard</li><li><span class="check" style="color:var(--greek-purple)">✓</span>Completion certificates</li><li><span class="check" style="color:var(--greek-purple)">✓</span>Devices available add-on</li></ul><button class="plan-btn" onclick="openSignup('greek')">Enroll Pledge Class</button></div>
+        <div class="chapter-plan featured-greek"><div class="greek-popular-tag">Most Popular</div><div class="plan-name">Full Chapter</div><div class="plan-sub">26–100 members</div><div class="plan-price"><sup>$</sup>5<span>/member/mo</span></div><ul class="plan-features"><li><span class="check">✓</span>All 6 training modules</li><li><span class="check">✓</span>Chapter dashboard + analytics</li><li><span class="check">✓</span>Co-branded certificates</li><li><span class="check">✓</span>Chapter leaderboard</li><li><span class="check">✓</span>Advisor email tools</li><li><span class="check">✓</span>Devices bundled at cost</li></ul><button class="plan-btn" onclick="openSignup('greek')">Enroll Full Chapter</button></div>
+        <div class="chapter-plan"><div class="plan-name" style="color:var(--greek-purple)">Multi-Chapter</div><div class="plan-sub">100+ members or multi-house</div><div class="plan-price" style="color:var(--greek-purple)">Custom</div><ul class="plan-features"><li><span class="check" style="color:var(--greek-purple)">✓</span>Everything in Full Chapter</li><li><span class="check" style="color:var(--greek-purple)">✓</span>Nationals reporting package</li><li><span class="check" style="color:var(--greek-purple)">✓</span>Custom onboarding session</li><li><span class="check" style="color:var(--greek-purple)">✓</span>Dedicated chapter success manager</li></ul><button class="plan-btn" onclick="openSignup('greek')">Contact Us</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="greek-section greek-section-white">
+    <div style="max-width:1080px;margin:0 auto">
+      <div class="section-label">Chapter Stories</div>
+      <h2 class="section-title">From chapter presidents & advisors</h2>
+      <div class="testi-grid" style="margin-top:2.5rem">
+        <div class="greek-testi-card"><div class="greek-stars">★★★★★</div><p class="testi-text">"We made it a chapter goal to have 100% completion before fall recruitment. The advisor dashboard made it easy to see who needed a nudge, and we hit it with a week to spare."</p><div class="testi-author">Megan W., Chapter President</div><div class="testi-school">Alpha Chi Omega, Auburn University</div></div>
+        <div class="greek-testi-card"><div class="greek-stars">★★★★★</div><p class="testi-text">"Our risk management chair presented the Splice chapter report to our nationals advisory board and they were incredibly impressed. It's become a model program for our region."</p><div class="testi-author">Lauren H., Chapter Advisor</div><div class="testi-school">Kappa Delta, Ole Miss</div></div>
+        <div class="greek-testi-card"><div class="greek-stars">★★★★★</div><p class="testi-text">"We did a chapter 'graduation' event when 75% of members finished. The co-branded certificates felt real and the members were genuinely proud. It created energy around safety in a way that nothing else has."</p><div class="testi-author">Abby R., VP of Member Development</div><div class="testi-school">Delta Gamma, LSU</div></div>
+      </div>
+    </div>
+  </div>
+
+  <section style="background:linear-gradient(135deg,var(--greek-purple),#1a0a2e);padding:4rem 3rem;text-align:center">
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.6rem;color:white;margin-bottom:1rem;font-weight:700">Make safety a chapter<br>tradition.</h2>
+    <p style="color:rgba(255,255,255,0.6);margin-bottom:2rem;font-size:1rem">120+ chapters have already made Splice part of their culture. Yours is next.</p>
+    <button class="btn-greek-primary" style="font-size:1rem;padding:1rem 2.5rem" onclick="openSignup('greek')">Enroll Your Chapter Today →</button>
+  </section>
+
+  <footer><span class="logo" onclick="goHome()">Splice.</span><p>© 2025 Splice Safety, LLC · University of Alabama · hello@splicethis.com</p><p style="margin-top:0.3rem">Empowering women through education, community, and innovation.</p></footer>
+</div>
+
+
+<!-- ==================== DASHBOARD VIEW ==================== -->
+<div id="dashboard-view" class="view">
+  <div class="dash-layout">
+    <aside class="sidebar">
+      <div class="sidebar-greeting">
+        <div class="label">Welcome back</div>
+        <div class="name" id="user-name-display">Alexis</div>
+      </div>
+      <ul class="sidebar-nav">
+        <li><a class="active" onclick="showView('dashboard')">🏠 Dashboard</a></li>
+        <li><a onclick="">📚 My Courses</a></li>
+        <li><a onclick="">🎁 Rewards</a></li>
+        <li><a onclick="">👯‍♀️ Community</a></li>
+        <li><a onclick="goHome()">← Back to Home</a></li>
+      </ul>
+      <div class="sidebar-progress">
+        <div class="label">Your Progress</div>
+        <div class="progress-bar"><div class="progress-fill" id="sidebar-progress" style="width:15%"></div></div>
+        <div class="progress-text" id="sidebar-progress-text">1 of 6 modules complete</div>
+      </div>
+    </aside>
+    <main class="dash-main">
+      <div class="dash-header">
+        <h2>Welcome back, <span id="dash-greeting-name">Alexis</span> 👋</h2>
+        <p>You're 15% through your training. Keep going — you're doing amazing.</p>
+      </div>
+      <div class="dash-stats">
+        <div class="dash-stat"><div class="label">Modules Done</div><div class="value" id="stat-done">1</div></div>
+        <div class="dash-stat"><div class="label">Total Points</div><div class="value" id="stat-pts">120</div></div>
+        <div class="dash-stat"><div class="label">Rewards Earned</div><div class="value" id="stat-rewards">1</div></div>
+        <div class="dash-stat"><div class="label">Day Streak</div><div class="value">3🔥</div></div>
+      </div>
+      <div class="rewards-panel">
+        <h3>🎁 Your Rewards</h3>
+        <div class="reward-items" id="dash-rewards">
+          <div class="reward-item earned"><div class="icon">☕</div><h4>Starbucks $5</h4><p>Module 1 complete</p><div class="earned-tag">Earned!</div></div>
+          <div class="reward-item"><div class="icon">💄</div><h4>Ulta $15</h4><p>Complete all 4 modules</p></div>
+          <div class="reward-item"><div class="icon">🛍️</div><h4>Amazon $10</h4><p>Refer 2 friends</p></div>
+          <div class="reward-item"><div class="icon">🏆</div><h4>Champion $25</h4><p>All modules + challenge</p></div>
+        </div>
+      </div>
+      <div class="dash-section-title">Continue Training</div>
+      <div class="module-list" id="module-list"></div>
+    </main>
+  </div>
+</div>
+
+<!-- ==================== VIDEO VIEW ==================== -->
+<div id="video-view" class="view">
+  <div class="video-layout">
+    <div class="video-main">
+      <div class="video-player">
+        <div class="video-placeholder" id="video-placeholder">
+          <div class="play-btn" onclick="simulatePlay()">▶</div>
+          <h3 id="video-title-main">Situational Awareness: Reading a Space</h3>
+          <p id="video-sub">Lesson 1 of 4 · 6 minutes</p>
+        </div>
+        <div id="video-playing" style="display:none;width:100%;height:100%;background:#1a0a10;border-radius:18px;flex-direction:column;align-items:center;justify-content:center">
+          <div style="color:rgba(255,255,255,0.5);font-size:0.85rem;text-align:center"><div style="font-size:2rem;margin-bottom:0.5rem">▶️</div>Video playing simulation<br><span id="timer-display" style="font-size:1.5rem;color:var(--blush);font-family:'Cormorant Garamond',serif;display:block;margin-top:0.5rem">0:00</span></div>
+        </div>
+      </div>
+      <div class="video-info">
+        <h2 id="video-info-title">Module 1: Situational Awareness</h2>
+        <p id="video-info-desc">Learn to read your environment the way security professionals do. This lesson covers the color-code awareness system and how to apply it in everyday campus situations.</p>
+        <div class="video-actions">
+          <button class="btn-video primary" onclick="markLessonComplete()" id="complete-btn">Mark Complete & Continue →</button>
+          <button class="btn-video ghost" onclick="showView('dashboard')">← Back to Dashboard</button>
+        </div>
+      </div>
+    </div>
+    <div class="video-sidebar">
+      <h3>Module 1: Situational Awareness</h3>
+      <ul class="lesson-list" id="lesson-list">
+        <li class="lesson-item active" onclick="selectLesson(0)"><div class="lesson-dot dot-done">✓</div><span class="lesson-label">Intro: Why Awareness Matters</span><span class="lesson-duration">3 min</span></li>
+        <li class="lesson-item" onclick="selectLesson(1)"><div class="lesson-dot dot-current">2</div><span class="lesson-label">Reading a Space</span><span class="lesson-duration">6 min</span></li>
+        <li class="lesson-item" onclick="selectLesson(2)"><div class="lesson-dot dot-pending">3</div><span class="lesson-label">The Cooper Color System</span><span class="lesson-duration">7 min</span></li>
+        <li class="lesson-item" onclick="selectLesson(3)"><div class="lesson-dot dot-pending">4</div><span class="lesson-label">Campus-Specific Scenarios</span><span class="lesson-duration">9 min</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SIGNUP MODAL -->
+<div class="modal-overlay" id="signup-modal">
+  <div class="modal" id="signup-modal-inner">
+    <button class="modal-close" onclick="closeSignup()">✕</button>
+    <h2 id="modal-title">Create Your Account</h2>
+    <p class="subtitle" id="modal-subtitle">Start your free trial — no credit card required</p>
+    <div class="form-row">
+      <div class="form-group"><label>First Name</label><input type="text" id="input-first" placeholder="Alexis" /></div>
+      <div class="form-group"><label>Last Name</label><input type="text" placeholder="Johnson" /></div>
+    </div>
+    <div class="form-group"><label id="email-label">University Email</label><input type="email" id="input-email" placeholder="you@university.edu" /></div>
+    <div class="form-group" id="school-group"><label>Your School</label><select><option>University of Alabama</option><option>Auburn University</option><option>Georgia Tech</option><option>Ole Miss</option><option>LSU</option><option>Other</option></select></div>
+    <div class="form-group" id="chapter-group" style="display:none"><label>Chapter Name</label><input type="text" placeholder="e.g. Alpha Phi — University of Alabama" /></div>
+    <div class="form-group" id="chapter-size-group" style="display:none"><label>Approximate Chapter Size</label><select><option>Under 25 members</option><option>26–50 members</option><option>51–100 members</option><option>100+ members</option></select></div>
+    <div class="form-group"><label>Choose Plan</label>
+      <select id="input-plan">
+        <option value="free">Free Trial — $0/mo</option>
+        <option value="student">Student — $9/mo</option>
+        <option value="squad">Squad — $29/mo</option>
+      </select>
+    </div>
+    <button class="btn-primary" id="modal-submit-btn" style="width:100%;padding:1rem;font-size:1rem;border-radius:12px" onclick="completeSignup()">Create Account & Start Training 🛡️</button>
+  </div>
+</div>
+
+<!-- QUIZ MODAL -->
+<div class="modal-overlay" id="quiz-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeQuiz()">✕</button>
+    <h2>Module Knowledge Check</h2>
+    <p class="subtitle" id="quiz-subtitle">Answer correctly to unlock your reward!</p>
+    <div id="quiz-content"></div>
+    <div id="quiz-feedback" class="quiz-feedback" style="display:none"></div>
+    <button class="btn-primary" id="quiz-next-btn" style="width:100%;padding:0.9rem;border-radius:12px;display:none" onclick="quizNext()">Continue →</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span class="t-icon" id="toast-icon">🎉</span><span id="toast-msg">Achievement unlocked!</span></div>
+
+<script>
+  const state = {
+    audience: 'student',
+    userName: 'Alexis',
+    modulesComplete: 1,
+    points: 120,
+    currentLesson: 1,
+    playing: false,
+    timer: null,
+    seconds: 0,
+    quizQuestion: 0,
+    quizScore: 0,
+    rewards: 1,
+  };
+
+  const modules = [
+    { id:1, icon:'👁️', title:'Situational Awareness', desc:'Read your environment, identify threats early', status:'done', lessons:4, mins:25, reward:'☕ $5 Starbucks' },
+    { id:2, icon:'🗣️', title:'De-escalation & Escape', desc:'Verbal techniques to defuse and exit danger', status:'next', lessons:5, mins:30, reward:'Part of Ulta unlock' },
+    { id:3, icon:'✊', title:'Physical Defense Basics', desc:'Essential strikes and release techniques', status:'locked', lessons:6, mins:45, reward:'Part of Ulta unlock' },
+    { id:4, icon:'🔑', title:'Mastering Your Splice', desc:'Deploy all 3 layers of your device confidently', status:'locked', lessons:5, mins:35, reward:'💄 $15 Ulta unlocked!' },
+    { id:5, icon:'🌙', title:'Night Safety & Campus Routes', desc:'Safe travel strategies for after dark', status:'locked', lessons:4, mins:20, reward:'' },
+    { id:6, icon:'📱', title:'Digital & Social Safety', desc:'Protect yourself online and on dates', status:'locked', lessons:4, mins:22, reward:'' },
+  ];
+
+  const quizQuestions = [
+    { q:"What is the FIRST thing you should do when entering an unfamiliar space?", opts:["Check your phone","Identify all exits","Find your friends","Order a drink"], ans:1, expl:"Identifying exits first is a core situational awareness habit — it gives you options before any threat materializes." },
+    { q:"According to the Cooper Color Code, 'Yellow' means:", opts:["You're in immediate danger","Relaxed, unaware","Relaxed alertness — aware of surroundings","Ready to act"], ans:2, expl:"Yellow is the ideal everyday state: calm but observant. White (unaware) leaves you vulnerable." },
+    { q:"Which of these best supports de-escalation?", opts:["Matching the aggressor's energy","Using a calm, steady voice and non-threatening posture","Backing against a wall","Making loud noises"], ans:1, expl:"A calm voice and open, non-threatening body language can reduce tension before it escalates." },
+  ];
+
+  function switchAudience(aud) {
+    state.audience = aud;
+    document.querySelectorAll('.aud-btn').forEach(b => {
+      b.className = b.className.replace(/active-\w+/,'').trim();
+    });
+    document.getElementById('aud-'+aud).classList.add('active-'+aud);
+
+    const nav = document.getElementById('main-nav');
+    const logo = document.getElementById('nav-logo');
+    const ctaBtn = document.getElementById('nav-cta-btn');
+
+    const existingTag = document.getElementById('nav-tag');
+    if (existingTag) existingTag.remove();
+
+    nav.className = 'nav-' + aud;
+    logo.className = 'logo logo-' + aud;
+
+    if (aud === 'student') {
+      ctaBtn.className = 'nav-cta cta-student';
+      ctaBtn.textContent = 'Start Free Trial';
+    } else if (aud === 'parent') {
+      ctaBtn.className = 'nav-cta cta-parent';
+      ctaBtn.textContent = 'Gift Splice';
+      const tag = document.createElement('span');
+      tag.id = 'nav-tag'; tag.className = 'nav-tag tag-parent';
+      tag.textContent = 'For Parents';
+      logo.insertAdjacentElement('afterend', tag);
+    } else {
+      ctaBtn.className = 'nav-cta cta-greek';
+      ctaBtn.textContent = 'Enroll Chapter';
+      const tag = document.createElement('span');
+      tag.id = 'nav-tag'; tag.className = 'nav-tag tag-greek';
+      tag.textContent = 'Greek Program';
+      logo.insertAdjacentElement('afterend', tag);
+    }
+
+    ctaBtn.onclick = () => openSignup(aud);
+
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById(aud + '-view').classList.add('active');
+    window.scrollTo(0,0);
+  }
+
+  function goHome() {
+    switchAudience(state.audience || 'student');
+  }
+
+  function showView(id) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById(id + '-view').classList.add('active');
+    window.scrollTo(0,0);
+    if (id === 'dashboard') renderModuleList();
+  }
+
+  function renderModuleList() {
+    const list = document.getElementById('module-list');
+    list.innerHTML = modules.map(m => `
+      <div class="module-item ${m.status}" onclick="${m.status!=='locked' ? "showView('video')" : ''}">
+        <div class="module-icon">${m.icon}</div>
+        <div class="module-info">
+          <h4>Module ${m.id}: ${m.title}</h4>
+          <p>${m.desc} · ${m.lessons} lessons · ${m.mins} min${m.reward ? ' · <strong style="color:var(--rose)">'+m.reward+'</strong>' : ''}</p>
+        </div>
+        <div class="module-status ${m.status==='done'?'status-done':m.status==='next'?'status-next':'status-locked'}">
+          ${m.status==='done'?'✓ Done':m.status==='next'?'▶ Start':'🔒 Locked'}
+        </div>
+      </div>
+    `).join('');
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const pct = Math.round((state.modulesComplete / modules.length) * 100);
+    document.getElementById('sidebar-progress').style.width = pct + '%';
+    document.getElementById('sidebar-progress-text').textContent = `${state.modulesComplete} of ${modules.length} modules complete`;
+    document.getElementById('stat-done').textContent = state.modulesComplete;
+    document.getElementById('stat-pts').textContent = state.points;
+  }
+
+  function openSignup(type) {
+    type = type || state.audience;
+    const modal = document.getElementById('signup-modal-inner');
+    const title = document.getElementById('modal-title');
+    const subtitle = document.getElementById('modal-subtitle');
+    const chapterGroup = document.getElementById('chapter-group');
+    const chapterSizeGroup = document.getElementById('chapter-size-group');
+    const planSelect = document.getElementById('input-plan');
+    const submitBtn = document.getElementById('modal-submit-btn');
+    const emailLabel = document.getElementById('email-label');
+
+    modal.className = 'modal modal-' + type;
+    chapterGroup.style.display = 'none';
+    chapterSizeGroup.style.display = 'none';
+
+    if (type === 'parent') {
+      title.textContent = 'Gift Splice to Your Daughter';
+      subtitle.textContent = 'Enter her info and select a plan — delivered instantly.';
+      emailLabel.textContent = 'Her University Email';
+      planSelect.innerHTML = `<option>Student Monthly — $9/mo</option><option>Student Semester — $30/4mo</option><option>Student Annual — $90/yr</option><option>Squad Gift — $29/mo</option>`;
+      submitBtn.textContent = 'Send Gift Now 🎁';
+      submitBtn.style.background = '#4a7fc1';
+    } else if (type === 'greek') {
+      title.textContent = 'Enroll Your Chapter';
+      subtitle.textContent = 'Get your chapter set up in under 5 minutes.';
+      emailLabel.textContent = 'Chapter Advisor Email';
+      chapterGroup.style.display = 'block';
+      chapterSizeGroup.style.display = 'block';
+      planSelect.innerHTML = `<option>Pledge Class — $6/member/mo</option><option>Full Chapter — $5/member/mo</option><option>Multi-Chapter — Custom pricing</option>`;
+      submitBtn.textContent = 'Submit Chapter Enrollment 🏛️';
+      submitBtn.style.background = 'var(--greek-mid)';
+    } else {
+      title.textContent = 'Create Your Account';
+      subtitle.textContent = 'Start your free trial — no credit card required';
+      emailLabel.textContent = 'University Email';
+      planSelect.innerHTML = `<option value="free">Free Trial — $0/mo</option><option value="student">Student — $9/mo</option><option value="squad">Squad — $29/mo</option>`;
+      submitBtn.textContent = 'Create Account & Start Training 🛡️';
+      submitBtn.style.background = 'var(--rose)';
+    }
+    document.getElementById('signup-modal').classList.add('open');
+  }
+
+  function closeSignup() { document.getElementById('signup-modal').classList.remove('open'); }
+
+  function completeSignup() {
+    const name = document.getElementById('input-first').value || 'Alexis';
+    state.userName = name;
+    document.getElementById('user-name-display').textContent = name;
+    document.getElementById('dash-greeting-name').textContent = name;
+    closeSignup();
+    if (state.audience === 'greek') {
+      showToast('🏛️', `Chapter enrollment submitted! We'll confirm within 24 hours.`);
+    } else if (state.audience === 'parent') {
+      showToast('🎁', `Gift sent! She'll receive an invite email shortly.`);
+    } else {
+      showView('dashboard');
+      showToast('🎉', `Welcome to Splice, ${name}! Module 1 is unlocked.`);
+    }
+  }
+
+  function simulatePlay() {
+    document.getElementById('video-placeholder').style.display = 'none';
+    const vp = document.getElementById('video-playing');
+    vp.style.display = 'flex';
+    state.seconds = 0;
+    state.timer = setInterval(() => {
+      state.seconds++;
+      const m = Math.floor(state.seconds/60);
+      const s = state.seconds % 60;
+      document.getElementById('timer-display').textContent = m + ':' + String(s).padStart(2,'0');
+      if (state.seconds >= 15) {
+        clearInterval(state.timer);
+        document.getElementById('complete-btn').style.background = '#22c55e';
+        document.getElementById('complete-btn').textContent = '✓ Lesson Complete! Continue →';
+      }
+    }, 200);
+  }
+
+  function markLessonComplete() {
+    clearInterval(state.timer);
+    state.currentLesson++;
+    if (state.currentLesson >= 4) {
+      state.modulesComplete = Math.min(state.modulesComplete + 1, 6);
+      state.points += 100;
+      modules[state.modulesComplete-1].status = 'done';
+      if (state.modulesComplete < 6) modules[state.modulesComplete].status = 'next';
+      renderModuleList();
+      showToast('🏆', 'Module complete! +100 points. Knowledge check unlocked!');
+      setTimeout(() => openQuiz(), 1500);
+    } else {
+      showToast('✅', 'Lesson complete! Keep going.');
+      selectLesson(state.currentLesson);
+    }
+  }
+
+  function selectLesson(idx) {
+    document.querySelectorAll('.lesson-item').forEach((el,i) => { el.classList.remove('active'); if(i===idx) el.classList.add('active'); });
+    document.getElementById('video-placeholder').style.display = 'flex';
+    document.getElementById('video-playing').style.display = 'none';
+    document.getElementById('complete-btn').style.background = '';
+    document.getElementById('complete-btn').textContent = 'Mark Complete & Continue →';
+    clearInterval(state.timer);
+  }
+
+  function openQuiz() {
+    state.quizQuestion = 0; state.quizScore = 0;
+    document.getElementById('quiz-modal').classList.add('open');
+    renderQuizQuestion();
+  }
+
+  function closeQuiz() { document.getElementById('quiz-modal').classList.remove('open'); }
+
+  function renderQuizQuestion() {
+    document.getElementById('quiz-feedback').style.display = 'none';
+    document.getElementById('quiz-next-btn').style.display = 'none';
+    if (state.quizQuestion >= quizQuestions.length) {
+      const score = state.quizScore;
+      document.getElementById('quiz-content').innerHTML = `<div style="text-align:center;padding:1rem 0"><div style="font-size:3rem;margin-bottom:1rem">${score===3?'🏆':score>=2?'⭐':'📚'}</div><h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;margin-bottom:0.5rem">${score===3?'Perfect Score!':score>=2?'Great Job!':'Keep Practicing!'}</h3><p style="color:var(--muted);margin-bottom:1.5rem">You got ${score} of 3 correct.</p>${score>=2?`<div style="background:#fde8ec;border-radius:14px;padding:1.2rem;margin-bottom:1rem"><div style="font-size:1.5rem">☕</div><strong>Reward Unlocked: $5 Starbucks Gift Card!</strong><p style="font-size:0.82rem;color:var(--muted);margin-top:0.3rem">Check your email to claim within 24 hours.</p></div>`:''}</div>`;
+      document.getElementById('quiz-next-btn').textContent = 'Back to Dashboard';
+      document.getElementById('quiz-next-btn').style.display = 'block';
+      document.getElementById('quiz-next-btn').onclick = () => { closeQuiz(); showView('dashboard'); };
+      if (score >= 2) { state.rewards++; document.getElementById('stat-rewards').textContent = state.rewards; showToast('☕', '$5 Starbucks reward earned!'); }
+      return;
+    }
+    const q = quizQuestions[state.quizQuestion];
+    document.getElementById('quiz-subtitle').textContent = `Question ${state.quizQuestion+1} of ${quizQuestions.length}`;
+    document.getElementById('quiz-content').innerHTML = `<div class="quiz-q">${q.q}</div><div class="quiz-options">${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerQuiz(${i})">${o}</button>`).join('')}</div>`;
+  }
+
+  function answerQuiz(idx) {
+    const q = quizQuestions[state.quizQuestion];
+    const opts = document.querySelectorAll('.quiz-opt');
+    opts.forEach(o => o.disabled = true);
+    const fb = document.getElementById('quiz-feedback');
+    if (idx === q.ans) { opts[idx].classList.add('correct'); fb.className = 'quiz-feedback feedback-good'; fb.textContent = '✓ Correct! ' + q.expl; state.quizScore++; }
+    else { opts[idx].classList.add('incorrect'); opts[q.ans].classList.add('correct'); fb.className = 'quiz-feedback feedback-bad'; fb.textContent = '✗ Not quite. ' + q.expl; }
+    fb.style.display = 'block';
+    document.getElementById('quiz-next-btn').style.display = 'block';
+    document.getElementById('quiz-next-btn').textContent = state.quizQuestion < quizQuestions.length-1 ? 'Next Question →' : 'See Results';
+    document.getElementById('quiz-next-btn').onclick = quizNext;
+  }
+
+  function quizNext() { state.quizQuestion++; renderQuizQuestion(); }
+
+  function showToast(icon, msg) {
+    const t = document.getElementById('toast');
+    document.getElementById('toast-icon').textContent = icon;
+    document.getElementById('toast-msg').textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 4000);
+  }
+
+  function selectGiftPlan(el) {
+    document.querySelectorAll('.gift-plan').forEach(p => p.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  renderModuleList();
+</script>
 </body>
 </html>
+```
